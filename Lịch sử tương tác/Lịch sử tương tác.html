@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interaction Timeline - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F8FAFC; }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background-color: #e2e8f0;
+            z-index: 0;
+        }
+        .timeline-item:last-child .timeline-line::before { display: none; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="interactions">
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto w-full">
+<!-- Top App Bar Shell (Mobile) -->
+<header class="bg-surface dark:bg-on-background w-full h-16 border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-mobile md:hidden z-10 sticky top-0">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">SETA</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-full transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<img alt="Clinician Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a mature Vietnamese doctor wearing a crisp white coat, smiling warmly. The lighting is soft and natural, emphasizing empathy and clinical expertise. Set against a clean, out-of-focus modern clinic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCppY3IEU2dMnKl73YqprT4zM7yh6CTVxWzxwlxqvX7hAB48tvPuQ2N9Q-Jxk_GFvTsDc83DOlCRkyy579fmql-HKBq6yEGhZostfWA7fpGXjtMgOCflWue_cHm7EetGwOA25wWm_LcyhMJLS_aalYdfI2jVi6vdYunf8KhECJCYilA_SzLre7FG8-OQmjIzvSryTCkvKieVjrsf-gjQvhbi5-8dHBcgNCTeKcdnUkV5-ITIppfpAMJTA"/>
+</div>
+</header>
+<!-- Page Header -->
+<div class="px-margin-mobile md:px-margin-desktop py-8 bg-surface-container-lowest sticky top-0 z-10 shadow-sm border-b border-outline-variant">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl">person</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Nguyễn Văn A</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Lịch sử tương tác &amp; Chăm sóc</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md rounded-xl h-12 px-6 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity w-full md:w-auto shadow-sm" onclick="document.getElementById('add-interaction-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined">add</span>
+                    Ghi nhận tương tác mới
+                </button>
+</div>
+<!-- Filter Bar -->
+<div class="max-w-container-max mx-auto mt-6 flex overflow-x-auto pb-2 gap-2 hide-scrollbar">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 transition-colors">Tất cả</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Chat</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Cuộc gọi</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Ghi chú</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Chỉ dẫn</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Cảnh báo</button>
+<button class="bg-surface-container-low text-on-surface hover:bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md whitespace-nowrap flex-shrink-0 border border-outline-variant transition-colors">Xét nghiệm</button>
+</div>
+</div>
+<!-- Timeline Content -->
+<div class="flex-1 px-margin-mobile md:px-margin-desktop py-8 max-w-container-max mx-auto w-full relative">
+<div class="space-y-6 relative">
+<!-- Item 1: Cảnh báo -->
+<div class="timeline-item relative flex gap-6 w-full">
+<div class="timeline-line relative flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:border-error/50 transition-colors group cursor-pointer">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-error-container text-on-error-container px-3 py-1 rounded-full font-label-md text-caption">Cảnh báo</span>
+<span class="font-label-md text-caption text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 09:00 Hôm nay</span>
+</div>
+<span class="font-label-md text-caption text-primary flex items-center gap-1 bg-primary-light px-3 py-1 rounded-full"><span class="material-symbols-outlined text-sm">check_circle</span> Đã xử lý</span>
+</div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-background mb-2 group-hover:text-error transition-colors">Nhịp tim bất thường &gt; 100 bpm</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Hệ thống ghi nhận nhịp tim tăng cao liên tục trong 15 phút. Bệnh nhân báo cáo cảm thấy hơi hồi hộp.</p>
+<a class="font-label-md text-label-md text-tertiary flex items-center gap-1 hover:underline" href="#">Xem chi tiết đo lường <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+<!-- Item 2: Cuộc gọi -->
+<div class="timeline-item relative flex gap-6 w-full">
+<div class="timeline-line relative flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">phone</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:border-primary/50 transition-colors group cursor-pointer">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-md text-caption">Cuộc gọi</span>
+<span class="font-label-md text-caption text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 10:30 Hôm nay</span>
+</div>
+<span class="font-label-md text-caption text-on-surface-variant flex items-center gap-1 bg-surface-container px-3 py-1 rounded-full"><span class="material-symbols-outlined text-sm">timer</span> 5 phút</span>
+</div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-background mb-2">BS. Hùng gọi tư vấn</h3>
+<div class="bg-surface rounded-lg p-4 border border-outline-variant flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-background"><strong>Kết quả:</strong> Đã nghe máy</p>
+<p class="font-caption text-caption text-on-surface-variant">Trao đổi về tình trạng nhịp tim sáng nay. BN đã ổn định.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: Xét nghiệm -->
+<div class="timeline-item relative flex gap-6 w-full">
+<div class="timeline-line relative flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">biotech</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:border-tertiary/50 transition-colors group cursor-pointer">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-md text-caption">Xét nghiệm</span>
+<span class="font-label-md text-caption text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> Hôm qua, 14:00</span>
+</div>
+</div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-background mb-2">Kết quả xét nghiệm máu tổng quát</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+<div class="bg-surface rounded-lg p-3 border border-outline-variant">
+<p class="font-caption text-caption text-on-surface-variant">Cholesterol</p>
+<p class="font-label-md text-body-md font-bold text-primary">4.2 mmol/L</p>
+</div>
+<div class="bg-surface rounded-lg p-3 border border-outline-variant">
+<p class="font-caption text-caption text-on-surface-variant">Đường huyết</p>
+<p class="font-label-md text-body-md font-bold text-on-background">5.1 mmol/L</p>
+</div>
+<div class="bg-surface rounded-lg p-3 border border-outline-variant">
+<p class="font-caption text-caption text-on-surface-variant">Triglyceride</p>
+<p class="font-label-md text-body-md font-bold text-on-background">1.3 mmol/L</p>
+</div>
+<div class="bg-error-container/20 rounded-lg p-3 border border-error-container"><p class="font-caption text-caption text-error">Acid Uric</p><p class="font-label-md text-body-md font-bold text-error flex items-center gap-1">450 µmol/L <span class="material-symbols-outlined text-sm">arrow_upward</span></p></div>
+</div>
+</div>
+</div>
+<!-- Item 4: Ghi chú -->
+<div class="timeline-item relative flex gap-6 w-full">
+<div class="timeline-line relative flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center z-10 border-4 border-background">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm hover:border-outline transition-colors group cursor-pointer">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 mb-4">
+<div class="flex items-center gap-3">
+<span class="bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-label-md text-caption">Ghi chú</span>
+<span class="font-label-md text-caption text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 2 ngày trước</span>
+</div>
+</div>
+<div class="flex gap-4 items-start">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-lg flex-shrink-0">
+                                LA
+                            </div>
+<div>
+<h3 class="font-headline-md text-body-md font-bold text-on-background mb-1">CSKH Lan Anh ghi chú</h3>
+<p class="font-body-md text-body-md text-on-surface-variant bg-surface p-4 rounded-lg border border-outline-variant">"KH phàn nàn về vị trí giấc sau khi dùng supplement mới. Cần bác sĩ đánh giá lại liều lượng Magie."</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Spacing for FAB -->
+<div class="h-24 md:hidden"></div>
+</div>
+<!-- Floating Action Button (Mobile Only) -->
+<button class="md:hidden fixed bottom-20 right-4 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center shadow-lg hover:bg-primary-container transition-colors z-20" onclick="document.getElementById('add-interaction-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</main>
+<!-- Modal: Ghi nhận tương tác mới -->
+<div class="fixed inset-0 bg-on-background/50 z-50 hidden flex items-center justify-center p-4" id="add-interaction-modal">
+<div data-seta-validate class="bg-surface-container-lowest rounded-xl w-full max-w-lg shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
+<div class="px-6 py-4 border-b border-outline-variant flex justify-between items-center bg-surface sticky top-0">
+<h3 class="font-headline-md text-headline-md font-bold text-on-background">Ghi nhận tương tác mới</h3>
+<button class="text-on-surface-variant hover:text-on-background transition-colors p-2" onclick="document.getElementById('add-interaction-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 overflow-y-auto space-y-5">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Loại tương tác <span class="text-error">*</span></label>
+<div class="relative">
+<select data-req data-req-msg="Vui lòng chọn loại tương tác" class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none transition-colors">
+<option value="">Chọn loại tương tác...</option>
+<option value="call">Cuộc gọi</option>
+<option value="chat">Chat/Tin nhắn</option>
+<option value="note">Ghi chú lâm sàng</option>
+<option value="instruction">Chỉ dẫn y tế</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Nội dung <span class="text-error">*</span></label>
+<textarea data-req data-req-msg="Vui lòng nhập nội dung" class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder-on-surface-variant/50" placeholder="Nhập chi tiết nội dung tương tác..." rows="4"></textarea>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Kết quả / Đánh giá</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" placeholder="VD: Bệnh nhân đã hiểu, Tình trạng ổn định..." type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">Thời điểm follow-up (Tùy chọn)</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-background focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="datetime-local"/>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 border-t border-outline-variant bg-surface flex justify-end gap-3 sticky bottom-0">
+<button class="px-6 py-3 rounded-xl font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors" onclick="document.getElementById('add-interaction-modal').classList.add('hidden')">Hủy</button>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-label-md text-label-md hover:opacity-90 transition-opacity" type="button" data-seta-submit data-seta-success="Đã lưu ghi nhận tương tác" data-seta-dismiss="#add-interaction-modal">Lưu ghi nhận</button>
+</div>
+</div>
+</div>
+<!-- Empty State Example (Hidden by default, for demonstration) -->
+<div class="hidden flex-1 flex items-center justify-center px-margin-mobile" id="empty-state">
+<div class="text-center max-w-md">
+<div class="w-20 h-20 bg-surface-container-high rounded-full flex items-center justify-center mx-auto mb-6 text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl">history_toggle_off</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-on-background mb-2">Chưa có tương tác nào</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Lịch sử tương tác của bệnh nhân Nguyễn Văn A hiện đang trống. Hãy ghi nhận tương tác đầu tiên để theo dõi quá trình chăm sóc.</p>
+<button class="bg-primary text-on-primary font-label-md text-label-md rounded-xl h-12 px-6 inline-flex items-center justify-center gap-2 hover:opacity-90 transition-opacity" onclick="document.getElementById('add-interaction-modal').classList.remove('hidden')">
+<span class="material-symbols-outlined">add</span>
+                Ghi nhận tương tác mới
+            </button>
+</div>
+</div>
+<script>
+        // Simple script to toggle empty state for demonstration if needed
+        // document.querySelector('.space-y-6').classList.add('hidden');
+        // document.getElementById('empty-state').classList.remove('hidden');
+    </script>
+</body></html>

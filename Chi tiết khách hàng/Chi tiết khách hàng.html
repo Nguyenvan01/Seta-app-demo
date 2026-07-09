@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Patient Detail Record - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F8FAFC; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="customers">
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- TopAppBar -->
+<header class="bg-surface h-20 w-full sticky top-0 z-40 border-b border-outline-variant flex justify-between items-center px-margin-desktop hidden md:flex transition-all duration-200">
+<div class="flex-1 max-w-lg">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-sm transition-all" placeholder="Tìm kiếm bệnh nhân, chỉ số..." type="text">
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxOnaNd0kDd7dYdnDDWm04Ic63QndLURwN-FBq05PNmgaKiZUpAg5tLx0LvT6q0nttOnPm7xq-iRgVDQV-zH3bAH9jgnR4_dan6UHg7z_I-ltQqYBLGFNXAK5Z5mIjnPBjwNQ0GgMAKlXenEZQHd7XclbGsmc2Pk_vYG9dgM3BmtM3fjBfrLAUhiEcg2w-Wb62gz9JT4RPWvhAZPWuFC-tQ3WvgMob3QtsW5L7aU6Mk6iwIBJBjE5QAg">
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-[1440px] mx-auto w-full">
+<!-- Patient Header Profile -->
+<div class="bg-surface-container-lowest rounded-xl p-6 border border-outline-variant mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div class="flex items-center gap-6">
+<div class="relative">
+<img alt="Portrait" class="w-24 h-24 rounded-full object-cover border-4 border-surface-container" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByJM8yKa2yQnJ3FtTunebjGS968JsNg2pdc_FfEtCSAknnP7IOgqf9-V0bAZ4LNB1i2LIg2JGhR9Nt04dlFX8Q_u0WGPttmm5exWC9zFIB-lftoqzF0OHVK553cTyKyChPBf3vqiWntxreq1aUMZJRT7gzH6mbo6cWO_S2h9sxyAWtcBM-wTISxsxgXrjD-lQI5n5qM_RhnReXqHVNrY80CWWDEr3FQqJ9jTi-UT-DUy8uN97MI1uxFg">
+<div class="absolute bottom-0 right-0 w-5 h-5 bg-primary rounded-full border-2 border-surface-container-lowest flex items-center justify-center" title="Đang theo dõi"></div>
+</div>
+<div>
+<h2 class="font-headline-lg text-2xl font-bold text-on-surface mb-2">Nguyễn Văn A</h2>
+<div class="flex flex-wrap items-center gap-3 font-body-md text-sm text-on-surface-variant">
+<span class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-md border border-surface-variant"><span class="material-symbols-outlined text-[16px]">badge</span> BN-12345</span>
+<span class="flex items-center gap-1 bg-tertiary-fixed text-on-tertiary-fixed-variant px-2 py-1 rounded-md font-semibold border border-tertiary-fixed-dim"><span class="material-symbols-outlined text-[16px]">star</span> Platinum</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">stethoscope</span> BS. Hùng</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">support_agent</span> CSKH: Lan Anh</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 border border-outline-variant rounded-lg font-label-md text-sm font-semibold text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat</span> Nhắn tin
+                    </button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-sm font-semibold hover:bg-primary-container transition-colors" type="button" onclick="window.location.href='../Thiết lập phác đồ/Thiết lập phác đồ.html'">
+<span class="material-symbols-outlined text-[20px]">add_task</span> Tạo phác đồ
+                    </button>
+</div>
+</div>
+<!-- Tab Navigation -->
+<div class="border-b border-outline-variant mb-8 overflow-x-auto">
+<div class="flex gap-8 min-w-max px-2">
+<button class="font-label-md text-sm font-semibold text-primary border-b-2 border-primary pb-3 px-1 whitespace-nowrap">Tổng quan</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Phác đồ &amp; Lịch</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Chỉ số sinh học</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Xét nghiệm</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Báo cáo tình trạng</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Ghi chú nội bộ</button>
+<button class="font-label-md text-sm font-semibold text-on-surface-variant hover:text-on-surface pb-3 px-1 whitespace-nowrap transition-colors border-b-2 border-transparent hover:border-outline-variant">Lịch sử tương tác</button>
+</div>
+</div>
+<!-- Dashboard Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+<!-- Left Column (Wider - 75%) -->
+<div class="lg:col-span-3 flex flex-col gap-6">
+<!-- Tóm tắt tình trạng -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[22px]">summarize</span>
+<h3 class="font-headline-md text-lg font-bold text-on-surface">Tóm tắt tình trạng</h3>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant leading-relaxed">
+                            Bệnh nhân hiện đang trong giai đoạn ổn định của phác đồ chống lão hóa. Cải thiện đáng kể về chất lượng giấc ngủ và năng lượng ban ngày. Tuy nhiên, huyết áp có dấu hiệu tăng nhẹ vào buổi sáng, cần theo dõi sát sao trong 2 tuần tới. Đã khuyến nghị tăng cường hoạt động cardio nhẹ.
+                        </p>
+</div>
+<!-- Biomarker nổi bật -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+<div class="flex items-center justify-between mb-5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">vital_signs</span>
+<h3 class="font-headline-md text-lg font-bold text-on-surface">Biomarker Nổi Bật</h3>
+</div>
+<button class="text-primary font-label-md text-sm font-semibold hover:underline">Xem tất cả</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- BMI -->
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col gap-2 bg-surface">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-xs font-semibold uppercase">
+<span class="material-symbols-outlined text-[16px]">scale</span> BMI
+                                </div>
+<div class="font-headline-md text-2xl font-bold text-on-surface">24.2</div>
+<div class="mt-2">
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 50%;"></div>
+</div>
+<div class="text-left font-caption text-xs text-primary mt-1 font-semibold">Ổn định - Xanh</div>
+</div>
+</div>
+<!-- Blood Pressure -->
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col gap-2 bg-surface">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-xs font-semibold uppercase">
+<span class="material-symbols-outlined text-[16px]">favorite</span> Huyết áp
+                                </div>
+<div class="font-headline-md text-2xl font-bold text-warning">135/85</div>
+<div class="mt-2">
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-warning h-full rounded-full" style="width: 75%;"></div>
+</div>
+<div class="text-left font-caption text-xs text-warning mt-1 font-semibold">Cảnh báo nhẹ - Vàng</div>
+</div>
+</div>
+<!-- Glucose -->
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col gap-2 bg-surface">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-xs font-semibold uppercase">
+<span class="material-symbols-outlined text-[16px]">water_drop</span> Glucose
+                                </div>
+<div class="font-headline-md text-2xl font-bold text-on-surface">5.2</div>
+<div class="mt-2">
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 40%;"></div>
+</div>
+<div class="text-left font-caption text-xs text-primary mt-1 font-semibold">Ổn định - Xanh</div>
+</div>
+</div>
+<!-- HRV -->
+<div class="p-4 border border-outline-variant rounded-lg flex flex-col gap-2 bg-surface">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-xs font-semibold uppercase">
+<span class="material-symbols-outlined text-[16px]">monitor_heart</span> HRV
+                                </div>
+<div class="font-headline-md text-2xl font-bold text-error">42<span class="text-sm font-normal text-on-surface-variant ml-1">ms</span></div>
+<div class="mt-2">
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 20%;"></div>
+</div>
+<div class="text-left font-caption text-xs text-error mt-1 font-semibold">Nguy cơ - Đỏ</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Hạng mục điều trị sắp tới -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-6">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[22px]">calendar_clock</span>
+<h3 class="font-headline-md text-lg font-bold text-on-surface">Hạng mục điều trị sắp tới</h3>
+</div>
+<div class="flex flex-col gap-3">
+<div class="p-4 border border-outline-variant rounded-lg flex justify-between items-center bg-surface hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-info-container text-on-info-container rounded-full flex items-center justify-center"><span class="material-symbols-outlined">vaccines</span></div>
+<div>
+<h4 class="font-label-md text-sm font-semibold text-on-surface">Tiêm truyền Vitamin C liều cao</h4>
+<p class="font-body-md text-xs text-on-surface-variant flex items-center gap-1 mt-0.5"><span class="material-symbols-outlined text-[14px]">location_on</span> Phòng VIP 2, Tầng 3</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-sm font-semibold text-on-surface">Ngày mai, 09:00</p>
+<span class="inline-block mt-1 bg-success-container text-on-success-container text-[10px] px-2 py-0.5 rounded font-semibold uppercase tracking-wide">Đã xác nhận</span>
+</div>
+</div>
+<div class="p-4 border border-outline-variant rounded-lg flex justify-between items-center bg-surface hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-success-container text-on-success-container rounded-full flex items-center justify-center"><span class="material-symbols-outlined">medication</span></div>
+<div>
+<h4 class="font-label-md text-sm font-semibold text-on-surface">Cập nhật đơn thuốc NAD+</h4>
+<p class="font-body-md text-xs text-on-surface-variant flex items-center gap-1 mt-0.5"><span class="material-symbols-outlined text-[14px]">person</span> BS. Hùng phụ trách</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-sm font-semibold text-on-surface">15/10/2023</p>
+<span class="inline-block mt-1 bg-surface-container text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-semibold uppercase tracking-wide">Sắp tới</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar-ish - 25%) -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<!-- Cảnh báo gần đây -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-5">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Cảnh báo gần đây</h3>
+</div>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 bg-error-container p-3 rounded-lg border border-error-container">
+<span class="material-symbols-outlined text-error text-[18px] mt-0.5">monitor_heart</span>
+<div>
+<p class="font-label-md text-sm font-semibold text-on-error-container leading-tight">Nhịp tim tăng (110 bpm)</p>
+<p class="font-caption text-xs text-on-error-container mt-1">2 giờ trước - Qua thiết bị đeo</p>
+</div>
+</li>
+<li class="flex items-start gap-3 bg-warning-container p-3 rounded-lg border border-warning-container">
+<span class="material-symbols-outlined text-on-warning-container text-[18px] mt-0.5">medication</span>
+<div>
+<p class="font-label-md text-sm font-semibold text-on-warning-container leading-tight">Bỏ lỡ liều thuốc buổi sáng</p>
+<p class="font-caption text-xs text-on-warning-container mt-1">Hôm qua, 08:30</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Ghi chú nội bộ -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant p-5 relative overflow-hidden">
+<div class="bg-surface-container-high text-on-surface text-[10px] uppercase font-bold tracking-wide py-1 px-3 flex items-center justify-center gap-1.5 mx--5 mt--5 mb-4 border-b border-outline-variant rounded-t-xl" style="margin: -1.25rem -1.25rem 1rem -1.25rem;">
+<span class="material-symbols-outlined text-[14px]">lock</span> Chỉ nội bộ — KH không xem được
+                        </div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-[20px]">note_alt</span>
+<h3 class="font-headline-md text-base font-bold text-on-surface">Ghi chú chuyên môn</h3>
+</div>
+<div class="space-y-3">
+<div class="bg-surface p-3 rounded-lg border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-xs font-semibold text-on-surface">BS. Hùng</span>
+<span class="font-caption text-[10px] text-on-surface-variant">10/10/2023</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant">Bệnh nhân hay quên uống thuốc, nhắc CSKH gọi điện vào mỗi sáng lúc 8:00 thay vì chỉ gửi tin nhắn.</p>
+</div>
+<div class="bg-surface p-3 rounded-lg border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-xs font-semibold text-on-surface">CSKH Lan Anh</span>
+<span class="font-caption text-[10px] text-on-surface-variant">11/10/2023</span>
+</div>
+<p class="font-body-md text-xs text-on-surface-variant">KH phàn nàn về vị giác sau khi dùng loại supplement mới, cân nhắc đổi dạng bào chế ở lần tái khám tới.</p>
+</div>
+</div>
+<button class="w-full mt-4 flex items-center justify-center gap-1.5 py-2 text-primary font-label-md text-sm font-semibold bg-primary-light hover:bg-success-container rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span> Thêm ghi chú mới
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

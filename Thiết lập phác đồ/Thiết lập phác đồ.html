@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SETA Longevity - Treatment Plan Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        body {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="plans">
+<div class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Main Header -->
+<header class="bg-surface border-b border-border-color flex flex-col sm:flex-row justify-between items-start sm:items-center px-4 sm:px-6 py-3 sm:py-0 sm:h-16 shrink-0 z-20 gap-3 sm:gap-0">
+<div class="flex flex-wrap items-center gap-4">
+<div>
+<h1 class="text-lg font-bold text-text-main">Nguyễn Văn A</h1>
+<p class="text-xs text-text-inactive">ID: #MD-8829 • Gói dịch vụ: Platinum</p>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface-variant text-xs font-semibold ml-0 sm:ml-2">Đang điều trị</span>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2 rounded-lg border border-border-color text-text-main text-sm font-medium hover:bg-surface-container-low transition-colors whitespace-nowrap">
+                Sao chép từ KH khác
+            </button>
+<button class="flex-1 sm:flex-none bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-hover transition-colors whitespace-nowrap">
+                Dùng mẫu
+            </button>
+</div>
+</header>
+<!-- 3-Column Workspace -->
+<main class="flex-1 overflow-y-auto lg:overflow-hidden flex flex-col lg:grid lg:grid-cols-12 px-4 lg:px-6 py-6 pb-28 lg:pb-6 gap-6 h-auto lg:h-[calc(100vh-144px)]">
+<!-- Left Column: Draggable Treatment Library -->
+<aside class="lg:col-span-3 bg-surface rounded-xl border border-border-color flex flex-col shadow-sm overflow-hidden h-[400px] lg:h-full">
+<div class="p-4 border-b border-border-color bg-surface-container-low">
+<h2 class="font-bold text-text-main">Thư viện hạng mục</h2>
+</div>
+<div class="p-4 flex-1 overflow-y-auto scroll-hidden">
+<div class="flex flex-col gap-2 mb-6">
+<button class="w-full flex items-center gap-3 bg-primary text-on-primary rounded-lg px-4 py-2.5 text-sm font-medium shadow-sm">
+<span class="material-symbols-outlined text-[20px]">medication</span>
+                        TPCN &amp; Thuốc
+                    </button>
+<button class="w-full flex items-center gap-3 text-text-main hover:bg-surface-container-low rounded-lg px-4 py-2.5 text-sm font-medium transition-colors border border-transparent hover:border-border-color">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+                        Bài tập
+                    </button>
+<button class="w-full flex items-center gap-3 text-text-main hover:bg-surface-container-low rounded-lg px-4 py-2.5 text-sm font-medium transition-colors border border-transparent hover:border-border-color">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+                        Dinh dưỡng
+                    </button>
+<button class="w-full flex items-center gap-3 text-text-main hover:bg-surface-container-low rounded-lg px-4 py-2.5 text-sm font-medium transition-colors border border-transparent hover:border-border-color">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                        Tái khám
+                    </button>
+<button class="w-full flex items-center gap-3 text-text-main hover:bg-surface-container-low rounded-lg px-4 py-2.5 text-sm font-medium transition-colors border border-transparent hover:border-border-color">
+<span class="material-symbols-outlined text-[20px]">biotech</span>
+                        Xét nghiệm
+                    </button>
+</div>
+<div class="pt-4 border-t border-border-color">
+<h3 class="text-xs font-semibold text-text-inactive uppercase tracking-wider mb-3">Kéo thả vào lịch trình</h3>
+<div class="flex flex-col gap-2">
+<div class="bg-surface border border-border-color rounded-lg p-3 cursor-move hover:border-primary transition-colors flex items-center gap-3 shadow-sm group">
+<div class="w-8 h-8 rounded-md bg-info-container text-on-info-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">medication</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-text-main truncate">Omega 3-6-9</p>
+<p class="text-xs text-text-inactive">1000mg</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">drag_indicator</span>
+</div>
+<div class="bg-surface border border-border-color rounded-lg p-3 cursor-move hover:border-primary transition-colors flex items-center gap-3 shadow-sm group">
+<div class="w-8 h-8 rounded-md bg-info-container text-on-info-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm">medication</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-semibold text-text-main truncate">Vitamin D3</p>
+<p class="text-xs text-text-inactive">5000 IU</p>
+</div>
+<span class="material-symbols-outlined text-outline group-hover:text-primary">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-border-color bg-surface-container-low">
+<button class="w-full flex items-center justify-center gap-2 border border-dashed border-primary text-primary rounded-lg px-4 py-2 text-sm font-medium hover:bg-primary-active-bg transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Thêm mục mới
+                </button>
+</div>
+</aside>
+<!-- Center Column: Timeline -->
+<section class="lg:col-span-6 bg-surface rounded-xl border border-border-color shadow-sm flex flex-col overflow-hidden h-[600px] lg:h-full">
+<div class="p-4 border-b border-border-color bg-surface-container-low flex justify-between items-center shrink-0">
+<h2 class="font-bold text-text-main">Lịch trình chi tiết</h2>
+<div class="flex bg-surface rounded-lg border border-border-color p-1 shadow-sm">
+<button class="px-4 py-1.5 rounded-md bg-surface-container text-text-main text-sm font-semibold">Hàng ngày</button>
+<button class="px-4 py-1.5 rounded-md text-text-inactive hover:text-text-main text-sm font-medium transition-colors">Tuần</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto scroll-hidden p-6 bg-surface-container-low">
+<div class="relative border-l-2 border-outline-variant ml-4 space-y-8 pb-8">
+<!-- Morning Slot -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-10 h-10 bg-surface rounded-full border-2 border-primary flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined text-[20px]">wb_sunny</span>
+</div>
+<div class="ml-8">
+<h3 class="font-semibold text-text-main mb-3 text-sm">Sáng (07:00 - 09:00)</h3>
+<div class="bg-surface border border-border-color rounded-xl p-4 shadow-sm hover:border-primary transition-colors relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-info-container text-on-info-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">medication</span>
+</div>
+<div>
+<h4 class="font-bold text-text-main">Omega 3-6-9 &amp; Vitamin D3</h4>
+<p class="text-sm text-text-inactive mt-1">1 viên mỗi loại • Uống sau ăn sáng</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-xs font-semibold text-on-surface-variant">Hàng ngày</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Noon Slot -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-10 h-10 bg-surface rounded-full border-2 border-outline-variant flex items-center justify-center text-outline shadow-sm">
+<span class="material-symbols-outlined text-[20px]">light_mode</span>
+</div>
+<div class="ml-8">
+<h3 class="font-semibold text-text-main mb-3 text-sm">Trưa (12:00 - 14:00)</h3>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center text-outline hover:bg-surface hover:border-primary hover:text-primary transition-all cursor-pointer">
+<p class="text-sm font-medium">Kéo thả hạng mục vào khung giờ này</p>
+</div>
+</div>
+</div>
+<!-- Afternoon Slot -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-10 h-10 bg-surface rounded-full border-2 border-outline-variant flex items-center justify-center text-outline shadow-sm">
+<span class="material-symbols-outlined text-[20px]">partly_cloudy_day</span>
+</div>
+<div class="ml-8">
+<h3 class="font-semibold text-text-main mb-3 text-sm">Chiều (14:00 - 17:00)</h3>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-6 text-center text-outline hover:bg-surface hover:border-primary hover:text-primary transition-all cursor-pointer">
+<p class="text-sm font-medium">Kéo thả hạng mục vào khung giờ này</p>
+</div>
+</div>
+</div>
+<!-- Evening Slot -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-10 h-10 bg-surface rounded-full border-2 border-info flex items-center justify-center text-info shadow-sm">
+<span class="material-symbols-outlined text-[20px]">dark_mode</span>
+</div>
+<div class="ml-8">
+<h3 class="font-semibold text-text-main mb-3 text-sm">Tối (18:00 - 20:00)</h3>
+<div class="bg-surface border border-border-color rounded-xl p-4 shadow-sm hover:border-info transition-colors relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-info"></div>
+<div class="flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-lg bg-info-container text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div>
+<h4 class="font-bold text-text-main">Pilates nhẹ nhàng</h4>
+<p class="text-sm text-text-inactive mt-1">30 phút • Tập 30 phút trước khi ngủ</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-surface-container px-2.5 py-1 rounded-md text-xs font-semibold text-on-surface-variant">3 lần/tuần</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Column: Details & Versioning -->
+<aside class="lg:col-span-3 flex flex-col gap-6 h-auto lg:h-full lg:overflow-y-auto scroll-hidden">
+<!-- Details Panel -->
+<div class="bg-surface rounded-xl border border-border-color shadow-sm flex flex-col">
+<div class="p-4 border-b border-border-color bg-surface-container-low">
+<h2 class="font-bold text-text-main">Chi tiết hạng mục</h2>
+</div>
+<div class="p-4 space-y-4">
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1.5">Tên hạng mục</label>
+<input class="w-full bg-surface border border-border-color rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm" type="text" value="Omega 3-6-9"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1.5">Liều lượng/Lượng</label>
+<input class="w-full bg-surface border border-border-color rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm" type="text" value="1 viên"/>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1.5">Tần suất</label>
+<select class="w-full bg-surface border border-border-color rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm">
+<option>Hàng ngày</option>
+<option>Cách ngày</option>
+<option>Hàng tuần</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1.5">Thời điểm</label>
+<select class="w-full bg-surface border border-border-color rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm">
+<option>Sáng (Sau ăn)</option>
+<option>Trưa</option>
+<option>Tối</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-semibold text-on-surface mb-1.5">Ghi chú cho Bệnh nhân</label>
+<textarea class="w-full bg-surface border border-border-color rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary shadow-sm resize-none" rows="3">Uống nhiều nước, không uống chung với trà/cà phê.</textarea>
+</div>
+</div>
+</div>
+<!-- Versioning Panel -->
+<div class="bg-surface rounded-xl border border-border-color shadow-sm flex flex-col">
+<div class="p-4 border-b border-border-color bg-surface-container-low flex justify-between items-center">
+<h2 class="font-bold text-text-main">Lịch sử phiên bản</h2>
+<span class="text-xs text-primary font-medium hover:underline cursor-pointer">Xem tất cả</span>
+</div>
+<div class="p-2 space-y-1">
+<div class="flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant cursor-pointer">
+<div>
+<p class="text-sm font-bold text-text-main">v1.1 (Hiện tại)</p>
+<p class="text-xs text-text-inactive mt-0.5">12/10/2023 • BS. Hùng</p>
+</div>
+<span class="bg-warning-container text-on-warning-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Nháp</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer border border-transparent">
+<div>
+<p class="text-sm font-semibold text-text-main">v1.0</p>
+<p class="text-xs text-text-inactive mt-0.5">01/09/2023 • BS. Hùng</p>
+</div>
+<span class="bg-success-container text-on-success-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Đã duyệt</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Bottom Action Bar -->
+<footer class="absolute bottom-0 left-0 w-full z-40 bg-surface border-t border-border-color lg:h-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] px-4 lg:px-6 py-4 lg:py-0 flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-0">
+<div class="flex items-center gap-3 w-full lg:w-auto justify-center lg:justify-start">
+<div class="bg-surface-container px-3 py-1.5 rounded-lg border border-outline-variant">
+<span class="text-xs font-semibold text-on-surface-variant mr-2">Trạng thái:</span>
+<span class="text-sm font-bold text-on-warning-container">Đang chỉnh sửa (Nháp)</span>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto justify-center lg:justify-end">
+<button class="flex-1 sm:flex-none justify-center px-4 sm:px-6 py-2.5 rounded-lg border border-border-color text-text-main font-semibold text-sm hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span class="hidden sm:inline">Lưu nháp</span>
+</button>
+<button class="flex-1 sm:flex-none justify-center px-4 sm:px-6 py-2.5 rounded-lg border border-border-color text-text-main font-semibold text-sm hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span class="hidden sm:inline">Gửi duyệt</span>
+</button>
+<button class="w-full sm:w-auto justify-center bg-primary text-on-primary px-4 sm:px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary-hover transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+                Đồng bộ App
+            </button>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Bảng điều khiển - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="dashboard">
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="bg-surface border-b border-outline-variant h-16 px-margin-desktop flex items-center justify-between flex-shrink-0">
+<div>
+<h1 class="text-headline-md font-bold text-on-surface">Bảng điều khiển</h1>
+<p class="text-caption text-on-surface-variant">Tổng quan vận hành hôm nay</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+<span class="text-label-md text-on-surface">Hôm nay</span>
+</div>
+<button class="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-margin-desktop space-y-6">
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md text-on-surface-variant">Khách hàng đang chăm sóc</p>
+<p class="text-headline-lg text-on-surface mt-1">1,248</p>
+</div>
+<div class="w-11 h-11 rounded-full bg-success-container text-success flex items-center justify-center">
+<span class="material-symbols-outlined">groups</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-caption text-success">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+4.8% so với tuần trước</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md text-on-surface-variant">Cảnh báo cần xử lý</p>
+<p class="text-headline-lg text-error mt-1">128</p>
+</div>
+<div class="w-11 h-11 rounded-full bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-caption text-error">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span>12 cảnh báo đỏ</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md text-on-surface-variant">SLA đúng hạn</p>
+<p class="text-headline-lg text-on-surface mt-1">94.2%</p>
+</div>
+<div class="w-11 h-11 rounded-full bg-info-container text-info flex items-center justify-center">
+<span class="material-symbols-outlined">timer</span>
+</div>
+</div>
+<div class="mt-4 h-2 rounded-full bg-surface-container overflow-hidden">
+<div class="h-full rounded-full bg-info w-[94%]"></div>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div>
+<p class="text-label-md text-on-surface-variant">Lịch hẹn hôm nay</p>
+<p class="text-headline-lg text-on-surface mt-1">36</p>
+</div>
+<div class="w-11 h-11 rounded-full bg-warning-container text-warning flex items-center justify-center">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-caption text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>8 lịch trong 2 giờ tới</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<div data-seta-states data-seta-states-label="dữ liệu vận hành" class="xl:col-span-8 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h2 class="text-headline-md text-on-surface">Dòng vận hành</h2>
+<p class="text-caption text-on-surface-variant">Cảnh báo, tư vấn và lịch hẹn theo khung giờ</p>
+</div>
+<div class="flex items-center gap-2 text-caption text-on-surface-variant">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-error"></span> Cảnh báo
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-info ml-2"></span> Tin nhắn
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-success ml-2"></span> Lịch
+</div>
+</div>
+<div class="p-5">
+<div class="h-72 overflow-x-auto">
+<svg aria-label="Biểu đồ đường dòng vận hành theo khung giờ" class="min-w-[680px] w-full h-full" role="img" viewBox="0 0 720 280">
+<rect fill="#ffffff" height="280" width="720"></rect>
+<g stroke="#e2e8f0" stroke-width="1">
+<line x1="56" x2="690" y1="30" y2="30"></line>
+<line x1="56" x2="690" y1="75" y2="75"></line>
+<line x1="56" x2="690" y1="120" y2="120"></line>
+<line x1="56" x2="690" y1="165" y2="165"></line>
+<line x1="56" x2="690" y1="210" y2="210"></line>
+</g>
+<g fill="#475569" font-family="Be Vietnam Pro" font-size="12">
+<text x="18" y="34">80</text>
+<text x="18" y="79">60</text>
+<text x="18" y="124">40</text>
+<text x="18" y="169">20</text>
+<text x="26" y="214">0</text>
+<text text-anchor="middle" x="60" y="248">08:00</text>
+<text text-anchor="middle" x="184" y="248">10:00</text>
+<text text-anchor="middle" x="308" y="248">12:00</text>
+<text text-anchor="middle" x="432" y="248">14:00</text>
+<text text-anchor="middle" x="556" y="248">16:00</text>
+<text text-anchor="middle" x="680" y="248">18:00</text>
+</g>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+<polyline points="60,128 184,92 308,146 432,60 556,112 680,178" stroke="#dc2626"></polyline>
+<polyline points="60,155 184,121 308,83 432,98 556,56 680,137" stroke="#2563eb"></polyline>
+<polyline points="60,142 184,160 308,115 432,137 556,87 680,169" stroke="#16a34a"></polyline>
+</g>
+<g stroke="#ffffff" stroke-width="3">
+<circle cx="60" cy="128" fill="#dc2626" r="5"></circle><circle cx="184" cy="92" fill="#dc2626" r="5"></circle><circle cx="308" cy="146" fill="#dc2626" r="5"></circle><circle cx="432" cy="60" fill="#dc2626" r="5"></circle><circle cx="556" cy="112" fill="#dc2626" r="5"></circle><circle cx="680" cy="178" fill="#dc2626" r="5"></circle>
+<circle cx="60" cy="155" fill="#2563eb" r="5"></circle><circle cx="184" cy="121" fill="#2563eb" r="5"></circle><circle cx="308" cy="83" fill="#2563eb" r="5"></circle><circle cx="432" cy="98" fill="#2563eb" r="5"></circle><circle cx="556" cy="56" fill="#2563eb" r="5"></circle><circle cx="680" cy="137" fill="#2563eb" r="5"></circle>
+<circle cx="60" cy="142" fill="#16a34a" r="5"></circle><circle cx="184" cy="160" fill="#16a34a" r="5"></circle><circle cx="308" cy="115" fill="#16a34a" r="5"></circle><circle cx="432" cy="137" fill="#16a34a" r="5"></circle><circle cx="556" cy="87" fill="#16a34a" r="5"></circle><circle cx="680" cy="169" fill="#16a34a" r="5"></circle>
+</g>
+<g fill="#0f172a" font-family="Be Vietnam Pro" font-size="12" font-weight="600">
+<text x="438" y="52">72</text>
+<text x="562" y="48">74</text>
+<text x="562" y="79">60</text>
+</g>
+</svg>
+</div>
+<div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="rounded-lg bg-error-container/50 px-3 py-2">
+<p class="text-caption text-error">Đỉnh cảnh báo</p>
+<p class="text-label-md text-on-surface font-semibold">72 ca lúc 14:00</p>
+</div>
+<div class="rounded-lg bg-info-container px-3 py-2">
+<p class="text-caption text-info">Tin nhắn cao nhất</p>
+<p class="text-label-md text-on-surface font-semibold">74 tin lúc 16:00</p>
+</div>
+<div class="rounded-lg bg-success-container px-3 py-2">
+<p class="text-caption text-success">Lịch hẹn cao nhất</p>
+<p class="text-label-md text-on-surface font-semibold">60 lịch lúc 16:00</p>
+</div>
+</div>
+</div>
+</div>
+<div data-seta-states data-seta-states-label="tải đội ngũ" class="xl:col-span-4 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant">
+<h2 class="text-headline-md text-on-surface">Tải đội ngũ</h2>
+<p class="text-caption text-on-surface-variant">Phân bổ công việc đang mở</p>
+</div>
+<div class="p-5 space-y-5">
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>BS. Hùng</span><span class="text-on-surface-variant">78%</span></div>
+<div class="h-2 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-primary rounded-full w-[78%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>BS. Lan</span><span class="text-on-surface-variant">64%</span></div>
+<div class="h-2 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-info rounded-full w-[64%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>CSKH Minh</span><span class="text-on-surface-variant">52%</span></div>
+<div class="h-2 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-success rounded-full w-[52%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>Điều phối</span><span class="text-on-surface-variant">41%</span></div>
+<div class="h-2 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-warning rounded-full w-[41%]"></div></div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<div data-seta-states data-seta-states-label="hàng đợi ưu tiên" class="xl:col-span-7 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h2 class="text-headline-md text-on-surface">Ưu tiên xử lý</h2>
+<p class="text-caption text-on-surface-variant">Các ca cần điều phối trong ngày</p>
+</div>
+<a class="text-label-md text-primary hover:text-primary-container" href="../Chức năng cảnh báo/Chức năng cảnh báo.html">Xem hàng đợi</a>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container border-b border-outline-variant">
+<tr>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">Khách hàng</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">Vấn đề</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">SLA</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low">
+<td class="px-4 py-3"><p class="font-semibold">Nguyễn Văn A</p><p class="text-caption text-on-surface-variant">Platinum</p></td>
+<td class="px-4 py-3">Nhịp tim bất thường</td>
+<td class="px-4 py-3 text-error font-semibold">05:20</td>
+<td class="px-4 py-3 text-right"><a class="text-primary font-medium hover:underline" href="../Chi tiết cảnh báo/Chi tiết cảnh báo.html">Mở</a></td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="px-4 py-3"><p class="font-semibold">Trần Thị B</p><p class="text-caption text-on-surface-variant">Premium</p></td>
+<td class="px-4 py-3">Đường huyết cao</td>
+<td class="px-4 py-3 text-error font-semibold">03:45</td>
+<td class="px-4 py-3 text-right"><a class="text-primary font-medium hover:underline" href="../Chi tiết cảnh báo/Chi tiết cảnh báo.html">Mở</a></td>
+</tr>
+<tr class="hover:bg-surface-container-low">
+<td class="px-4 py-3"><p class="font-semibold">Lê Văn C</p><p class="text-caption text-on-surface-variant">Standard</p></td>
+<td class="px-4 py-3">Bỏ lỡ thuốc huyết áp</td>
+<td class="px-4 py-3 text-warning font-semibold">45:20</td>
+<td class="px-4 py-3 text-right"><a class="text-primary font-medium hover:underline" href="../Chi tiết cảnh báo/Chi tiết cảnh báo.html">Mở</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="xl:col-span-5 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h2 class="text-headline-md text-on-surface">Lịch sắp tới</h2>
+<p class="text-caption text-on-surface-variant">Các mốc trong ca trực</p>
+</div>
+<span class="material-symbols-outlined text-primary">event_note</span>
+</div>
+<div class="p-5 space-y-4">
+<div class="flex gap-3">
+<div class="w-14 text-caption text-on-surface-variant pt-1">10:30</div>
+<div class="flex-1 border-l-2 border-primary pl-4">
+<p class="text-label-md font-semibold">Tư vấn Nguyễn Văn A</p>
+<p class="text-caption text-on-surface-variant">Theo dõi sau cảnh báo nhịp tim</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-14 text-caption text-on-surface-variant pt-1">13:00</div>
+<div class="flex-1 border-l-2 border-info pl-4">
+<p class="text-label-md font-semibold">Tái khám Trần Thị B</p>
+<p class="text-caption text-on-surface-variant">Đánh giá gói Premium</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="w-14 text-caption text-on-surface-variant pt-1">15:45</div>
+<div class="flex-1 border-l-2 border-warning pl-4">
+<p class="text-label-md font-semibold">Duyệt phác đồ mới</p>
+<p class="text-caption text-on-surface-variant">3 phác đồ chờ xác nhận</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

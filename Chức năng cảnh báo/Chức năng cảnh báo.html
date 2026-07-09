@@ -1,0 +1,289 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Hàng đợi cảnh báo - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F6F8FB; }
+        .table-row-hover:hover { background-color: #f8fafc; }
+        .border-left-red { border-left: 4px solid #ef4444 !important; }
+        .border-left-orange { border-left: 4px solid #f97316 !important; }
+        .border-left-green { border-left: 4px solid #10b981 !important; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="alerts">
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface full-width top-0 border-b border-outline-variant flex justify-between items-center h-16 px-margin-desktop w-full flex-shrink-0 z-10 relative">
+<div>
+<h2 class="text-headline-md font-bold text-on-surface">Hàng đợi cảnh báo</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-xl">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface border border-outline-variant rounded-full text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors w-64" placeholder="Tìm kiếm bệnh nhân..." type="text">
+</div>
+<button class="relative p-2 text-on-surface-variant hover:text-primary cursor-pointer transition-colors hover:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<div class="hidden md:flex items-center px-3 py-1 bg-primary/10 text-primary rounded-full text-caption font-medium">Admin Role</div><div class="flex items-center gap-2 pl-4 border-l border-outline-variant">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar image showing a professional female doctor in a white coat, brightly lit with a clean medical clinic background, conveying trust and medical expertise in a light-mode modern healthcare application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGCW0id1AQFbNNXyhpIsYTDsqelx0djpk90vgVRtRWI13Z1eSZBwsL5y7vpMozWt3V24Sq2NHUhls2Jsw5coffRuhj-5ZJwH3awFpehUrLNP783ApAJkSRRXpf2Weey3mmU13G4K1xeHZISCweDUZo9yfj0hwfhoMMQWCjoZEJTGeuatYKRw2bleW6OJMeIDp2bnZZxlbIpyd926Lfu2GL6hZofZzhgvatiBLk3uCE2GUYpJYcoXcofA">
+<span class="text-label-md text-on-surface">Bác sĩ</span>
+<span class="material-symbols-outlined text-outline text-sm">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-margin-desktop space-y-6 bg-[#F6F8FB]">
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="group h-32 bg-white border border-[#E5EAF2] rounded-2xl p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_28px_rgba(15,23,42,0.10)] hover:-translate-y-0.5 transition-all duration-200">
+<div class="flex items-start justify-between gap-4">
+<div class="min-w-0">
+<p class="text-[13px] font-semibold text-slate-600">Tổng cảnh báo mở</p>
+<div class="mt-2 flex items-end gap-2">
+<p class="text-[34px] leading-none font-bold text-slate-900">128</p>
+<span class="mb-1 inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">+8</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">monitoring</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<p class="text-[12px] text-slate-500">Tất cả cảnh báo đang mở</p>
+</div>
+</div>
+<div class="group h-32 bg-white border border-[#E5EAF2] border-l-4 border-l-error rounded-2xl p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_28px_rgba(220,38,38,0.14)] hover:-translate-y-0.5 transition-all duration-200">
+<div class="flex items-start justify-between gap-4">
+<div class="min-w-0">
+<p class="text-[13px] font-semibold text-slate-600">Đỏ / Khẩn cấp</p>
+<div class="mt-2 flex items-end gap-2">
+<p class="text-[34px] leading-none font-bold text-error">12</p>
+<span class="mb-1 inline-flex items-center rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-error">+3</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-red-50 text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<p class="text-[12px] text-slate-500">Cần xử lý ngay</p>
+</div>
+</div>
+<div class="group h-32 bg-white border border-[#E5EAF2] border-l-4 border-l-warning rounded-2xl p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_28px_rgba(234,88,12,0.14)] hover:-translate-y-0.5 transition-all duration-200">
+<div class="flex items-start justify-between gap-4">
+<div class="min-w-0">
+<p class="text-[13px] font-semibold text-slate-600">Quá SLA</p>
+<div class="mt-2 flex items-end gap-2">
+<p class="text-[34px] leading-none font-bold text-warning">05</p>
+<span class="mb-1 inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-[11px] font-semibold text-warning">-2</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-orange-50 text-warning flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">timer_off</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<p class="text-[12px] text-slate-500">Đã vượt thời gian phản hồi</p>
+</div>
+</div>
+<div class="group h-32 bg-white border border-[#E5EAF2] rounded-2xl p-5 shadow-[0_1px_3px_rgba(15,23,42,0.06)] hover:shadow-[0_12px_28px_rgba(37,99,235,0.12)] hover:-translate-y-0.5 transition-all duration-200">
+<div class="flex items-start justify-between gap-4">
+<div class="min-w-0">
+<p class="text-[13px] font-semibold text-slate-600">Chưa gán</p>
+<div class="mt-2 flex items-end gap-2">
+<p class="text-[34px] leading-none font-bold text-info">24</p>
+<span class="mb-1 inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-info">+5</span>
+</div>
+</div>
+<div class="w-12 h-12 rounded-full bg-blue-50 text-info flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[26px]">person_add</span>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between gap-3">
+<p class="text-[12px] text-slate-500">Chưa có người phụ trách</p>
+</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm flex flex-wrap gap-4 items-center">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+<span class="text-label-md">Bộ lọc:</span>
+</div>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-1.5 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface-variant min-w-[140px]">
+<option value="">Mức độ</option>
+<option value="red">Đỏ (Khẩn cấp)</option>
+<option value="orange">Cam (Cao)</option>
+<option value="green">Xanh (Trung bình)</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-1.5 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface-variant min-w-[140px]">
+<option value="">Trạng thái</option>
+<option value="new">Mới</option>
+<option value="processing">Đang xử lý</option>
+<option value="completed">Hoàn thành</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-1.5 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface-variant min-w-[140px]">
+<option value="">Người phụ trách</option>
+<option value="unassigned">Chưa gán</option>
+<option value="me">Tôi</option>
+<option value="other">Khác</option>
+</select>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-1.5 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-on-surface-variant min-w-[140px]">
+<option value="">Gói dịch vụ</option>
+<option value="standard">Standard</option>
+<option value="premium">Premium</option>
+<option value="platinum">Platinum</option>
+</select>
+<button class="ml-auto text-primary text-label-md hover:underline font-medium">Xóa bộ lọc</button>
+</div>
+<!-- Data Table -->
+<div data-seta-states data-seta-states-label="cảnh báo" class="bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead class="bg-surface-container border-b border-outline-variant">
+<tr>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Khách hàng</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Triệu chứng/Loại</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Mức độ</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Thời gian tạo</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Đồng hồ SLA</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Người phụ trách</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium">Trạng thái</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant font-medium text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Overdue SLA, Red -->
+<tr class="table-row-hover bg-error-container/30 border-left-red">
+<td class="px-4 py-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of an elderly male patient with a gentle smile, soft natural lighting, medical profile picture aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIRu6L17NtNprJd0oFkkrscgbzlbuZpm1jIJzNd0psI1VgO-sn6dAh7B7OzO0lPy43uX9eK0qSUey-Ri8dXE1sQJJx8-ARgDi6iSd8OqAOslmtl87tFZ78bBiS3m1bdUyRKWeOFu5-LEliLgymxUj83DojkmlniwJALBf8T5hN6fWwbLGkPR-s0E7dtuGvGbVoWfmH6S4DVafXK64b6Tlkqkrfm4voUdtmt8YH4FaL6VrsLnfDcV_Ksg">
+<div>
+<p class="text-body-md font-semibold text-on-surface">Nguyễn Văn A</p>
+<p class="text-caption text-on-surface-variant">Platinum</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-3">
+<p class="text-body-md text-on-surface">Nhịp tim bất thường</p>
+<p class="text-caption text-on-surface-variant">Cảnh báo từ Apple Watch</p>
+</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-error text-caption font-medium"><span class="material-symbols-outlined text-xs mr-1">warning</span>Đỏ - Khẩn cấp</span>
+</td>
+<td class="px-4 py-3 text-body-md text-on-surface-variant">10:15 - Hôm nay</td>
+<td class="px-4 py-3">
+<div class="flex items-center text-error font-medium text-body-md gap-1">
+<span class="material-symbols-outlined text-sm">error</span>
+                                        Quá hạn 12p
+                                    </div>
+</td>
+<td class="px-4 py-3 text-body-md text-on-surface-variant">Chưa gán</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-caption">Mới</span>
+</td>
+<td class="px-4 py-3 text-right">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-label-md hover:bg-primary-container transition-colors shadow-sm font-medium">Nhận xử lý</button>
+</td>
+</tr>
+<!-- Row 2: Critical, near SLA -->
+<tr class="table-row-hover border-left-red">
+<td class="px-4 py-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant text-label-md">T</div>
+<div>
+<p class="text-body-md font-semibold text-on-surface">Trần Thị B</p>
+<p class="text-caption text-on-surface-variant">Premium</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-3">
+<p class="text-body-md text-on-surface">Đường huyết cao (250mg/dL)</p>
+<p class="text-caption text-on-surface-variant">Cập nhật thủ công</p>
+</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-error text-caption font-medium"><span class="material-symbols-outlined text-xs mr-1">warning</span>Đỏ - Khẩn cấp</span>
+</td>
+<td class="px-4 py-3 text-body-md text-on-surface-variant">10:45 - Hôm nay</td>
+<td class="px-4 py-3">
+<div class="text-error font-medium text-body-md">
+                                        03:45
+                                    </div>
+</td>
+<td class="px-4 py-3 text-body-md text-on-surface-variant">Chưa gán</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-caption">Mới</span>
+</td>
+<td class="px-4 py-3 text-right">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-label-md hover:bg-primary-container transition-colors shadow-sm font-medium">Nhận xử lý</button>
+</td>
+</tr>
+<!-- Row 3: Orange, Warning -->
+<tr class="table-row-hover border-left-transparent border-l-4">
+<td class="px-4 py-3">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a middle-aged female patient, neutral expression, clean modern aesthetic for a medical dashboard application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU33LkLJLGj2pPXbw5QvGLWmwaErE4y6NE_qv6WClc3fBCZQ-gL6qreDTmSA-jwJGtv84itb_mxtZ4buc147_Inac8KBdF9bz81qC_lqhg-GE1O9aDF4Oe6xsbxAKf_22fgRuiQj4GSDr_r3JIduRHlie9U4JY-GGpOpWaWpL3YR16qHW6nuFnc3IWtqC0-0J24ILVQpi9sR5hxHEpKEn09nLUYEPUFvMRw4O_nH4hdNK4jWUum3Il6w">
+<div>
+<p class="text-body-md font-semibold text-on-surface">Lê Văn C</p>
+<p class="text-caption text-on-surface-variant">Standard</p>
+</div>
+</div>
+</td>
+<td class="px-4 py-3">
+<p class="text-body-md text-on-surface">Bỏ lỡ thuốc huyết áp</p>
+<p class="text-caption text-on-surface-variant">Smart Pillbox</p>
+</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-warning-container text-warning text-caption font-medium"><span class="material-symbols-outlined text-xs mr-1">error</span>Cam - Cao</span>
+</td>
+<td class="px-4 py-3 text-body-md text-on-surface-variant">09:00 - Hôm nay</td>
+<td class="px-4 py-3">
+<div class="text-on-surface-variant text-body-md">
+                                        45:20
+                                    </div>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-info text-on-primary flex items-center justify-center text-xs font-medium">BS</div>
+<span class="text-body-md text-on-surface">BS. Hùng</span>
+</div>
+</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-info-container text-info text-caption font-medium">Đang xử lý</span>
+</td>
+<td class="px-4 py-3 text-right">
+<a class="border border-outline-variant text-on-surface-variant px-3 py-1.5 rounded-lg text-label-md hover:bg-surface-container transition-colors font-medium" href="../Chi tiết cảnh báo/Chi tiết cảnh báo.html">Xem chi tiết</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-4 py-3 border-t border-outline-variant bg-surface flex items-center justify-between">
+<p class="text-caption text-on-surface-variant">Hiển thị 1-10 của 128 cảnh báo</p>
+<div class="flex items-center gap-1">
+<button class="p-1 text-outline hover:text-on-surface disabled:opacity-50"><span class="material-symbols-outlined text-lg">chevron_left</span></button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary text-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface-variant text-label-md flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded hover:bg-surface-container text-on-surface-variant text-label-md flex items-center justify-center">3</button>
+<span class="text-on-surface-variant px-1">...</span>
+<button class="p-1 text-outline hover:text-on-surface"><span class="material-symbols-outlined text-lg">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

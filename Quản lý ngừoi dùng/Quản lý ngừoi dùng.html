@@ -1,0 +1,307 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SETA Longevity - Quản lý người dùng</title>
+<!-- Google Fonts: Be Vietnam Pro -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+  body { font-family: 'Be Vietnam Pro', sans-serif; }
+  /* Custom scrollbar for better appearance */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+</style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="users">
+<!-- Main Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background">
+<!-- TopAppBar -->
+<header class="bg-surface h-16 border-b border-border flex items-center justify-between px-6 shrink-0 z-10">
+<h1 class="text-xl font-bold text-text-main">Quản lý người dùng</h1>
+<div class="flex items-center gap-4">
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-shadow" placeholder="Tìm kiếm người dùng..." type="text">
+</div>
+<button class="bg-primary hover:bg-primary-dark text-on-primary px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+        Thêm người dùng
+      </button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-6">
+<!-- Security Notice -->
+
+<!-- Filters -->
+<div class="flex gap-4 mb-6">
+<div class="flex flex-col gap-1.5 w-48">
+<label class="text-xs font-medium text-text-muted">Vai trò</label>
+<select class="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option value="">Tất cả vai trò</option>
+<option value="kh">Khách hàng</option>
+<option value="bs">Bác sĩ</option>
+<option value="cskh">CSKH</option>
+<option value="admin">Admin</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5 w-48">
+<label class="text-xs font-medium text-text-muted">Trạng thái</label>
+<select class="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option value="">Tất cả trạng thái</option>
+<option value="active">Hoạt động</option>
+<option value="locked">Khóa</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5 w-56">
+<label class="text-xs font-medium text-text-muted">Gói dịch vụ</label>
+<select class="bg-surface border border-border rounded-lg px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option value="">Tất cả gói</option>
+<option value="longevity_basic">Longevity Basic</option>
+<option value="longevity_premium">Longevity Premium</option>
+<option value="dna_screening">DNA Screening Pro</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div data-seta-states data-seta-states-label="người dùng" class="bg-surface border border-border rounded-lg shadow-sm overflow-hidden">
+<table class="w-full text-left text-sm whitespace-nowrap">
+<thead class="bg-surface-container-low border-b border-border text-text-muted font-medium">
+<tr>
+<th class="px-6 py-3">Họ tên &amp; Email</th>
+<th class="px-6 py-3">Vai trò</th>
+<th class="px-6 py-3">Gói dịch vụ</th>
+<th class="px-6 py-3">Trạng thái</th>
+<th class="px-6 py-3">Lần đăng nhập</th>
+<th class="px-6 py-3 text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-info-container text-on-info-container flex items-center justify-center font-bold text-xs">NT</div>
+<div>
+<div class="font-medium text-text-main">Nguyễn Văn Thành</div>
+<div class="text-xs text-text-muted">thanh.nguyen@example.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-text-main text-xs font-medium">
+                  Khách hàng
+                </span>
+</td>
+<td class="px-6 py-4 text-text-main">Longevity Premium</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-success-container text-on-success-container text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                  Hoạt động
+                </span>
+</td>
+<td class="px-6 py-4 text-text-muted">Hôm nay, 09:41</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img alt="BS Yến" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVqcBtdSSyCo4yvnT0kAiuwx3_LdWwU4H8iUKH_2x-W0RbqXoYnrrOplA-bSDD4iiiW7dQFWI8eHJH1OG0L3wTQUlHUPiVDbtrQwUavwC4Cwn6IzWxX6skcdjRncET4l9UG4AMOWzw_4KFZ8H8si8W1PERjRmwzZkCYi5Y9y-I_YSqL-BvIuwPa3uZqKYFPmJfp6o8IRAMkpcqoZknfc9Xbrz2a1MjxZRLsmCQnux-e3dJfcU4MsJDCQ">
+<div>
+<div class="font-medium text-text-main">BS. Lê Hoàng Yến</div>
+<div class="text-xs text-text-muted">yen.le@medpro.vn</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-info-container text-on-info-container text-xs font-medium">
+                  Bác sĩ
+                </span>
+</td>
+<td class="px-6 py-4 text-text-muted italic">-</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-success-container text-on-success-container text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-success"></span>
+                  Hoạt động
+                </span>
+</td>
+<td class="px-6 py-4 text-text-muted">Hôm qua, 16:30</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors opacity-75">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-xs">TM</div>
+<div>
+<div class="font-medium text-text-main">Trần Phương Mai</div>
+<div class="text-xs text-text-muted">mai.tran88@gmail.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-text-main text-xs font-medium">
+                  Khách hàng
+                </span>
+</td>
+<td class="px-6 py-4 text-text-main">DNA Screening Pro</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-error-light text-error text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  Đã khóa
+                </span>
+</td>
+<td class="px-6 py-4 text-text-muted">12/10/2023</td>
+<td class="px-6 py-4 text-right">
+<button class="text-secondary hover:text-primary transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="border-t border-border px-6 py-4 flex items-center justify-between bg-surface">
+<span class="text-xs text-text-muted">Hiển thị 1-10 trong số 245 người dùng</span>
+<div class="flex gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border text-secondary hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary text-sm font-medium">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border text-text-main hover:bg-surface-container-low text-sm font-medium">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border text-text-main hover:bg-surface-container-low text-sm font-medium">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-border text-secondary hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Right Drawer -->
+<aside data-seta-validate class="w-96 bg-surface border-l border-border flex flex-col h-full shrink-0 z-10">
+<div class="px-6 py-5 border-b border-border flex justify-between items-center shrink-0">
+<h3 class="text-lg font-semibold text-text-main">Thêm/Sửa người dùng</h3>
+<button class="text-secondary hover:bg-surface-container rounded p-1 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6">
+<form class="space-y-8">
+<!-- Basic Info -->
+<div class="space-y-4">
+<h4 class="text-xs font-semibold text-primary uppercase tracking-wider">Thông tin cơ bản</h4>
+<div class="space-y-3">
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Họ và tên <span class="text-error">*</span></label>
+<input class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none" data-req type="text" value="Nguyễn Văn Thành">
+</div>
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Email <span class="text-error">*</span></label>
+<input class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none" data-req type="email" value="thanh.nguyen@example.com">
+</div>
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Số điện thoại</label>
+<input class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="tel" value="0901234567">
+</div>
+</div>
+</div>
+<hr class="border-border">
+<!-- Role & Package -->
+<div class="space-y-4">
+<h4 class="text-xs font-semibold text-primary uppercase tracking-wider">Phân quyền &amp; Dịch vụ</h4>
+<div class="space-y-3">
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Vai trò</label>
+<select class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option selected="" value="kh">Khách hàng</option>
+<option value="bs">Bác sĩ</option>
+<option value="cskh">CSKH</option>
+<option value="admin">Admin</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-md border border-border space-y-3">
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Gán gói dịch vụ</label>
+<select class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option selected="" value="longevity_premium">Longevity Premium</option>
+<option value="longevity_basic">Longevity Basic</option>
+<option value="dna">DNA Screening</option>
+<option value="none">Không có gói</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-text-main mb-1">Ngày hiệu lực</label>
+<input class="w-full bg-surface border border-border rounded-md px-3 py-2 text-sm text-text-main focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="date" value="2023-10-25">
+</div>
+</div>
+</div>
+</div>
+<hr class="border-border">
+<!-- Security Section -->
+<div class="space-y-4">
+<h4 class="text-xs font-semibold text-primary uppercase tracking-wider">Bảo mật</h4>
+<div class="flex items-center justify-between">
+<div>
+<div class="text-sm font-medium text-text-main">Xác thực 2 lớp (2FA)</div>
+<div class="text-xs text-text-muted">Bắt buộc đối với nhân viên y tế</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value="">
+<div class="w-9 h-5 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<div class="text-sm font-medium text-text-main">Tài khoản hoạt động</div>
+<div class="text-xs text-text-muted">Khóa để tạm dừng truy cập</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value="">
+<div class="w-9 h-5 bg-surface-container-high peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-surface after:border-outline-variant after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</form>
+</div>
+<!-- Drawer Footer -->
+<div class="p-6 border-t border-border bg-surface-container-low flex gap-3 shrink-0">
+<button class="flex-1 px-4 py-2 bg-surface border border-border text-text-main rounded-lg text-sm font-medium hover:bg-surface-container-low transition-colors">Hủy</button>
+<button class="flex-1 px-4 py-2 bg-primary text-on-primary rounded-lg text-sm font-medium hover:bg-primary-dark transition-colors shadow-sm" type="button" data-seta-submit data-seta-success="Đã lưu thông tin người dùng">Lưu thay đổi</button>
+</div>
+</aside>
+</div>
+</div>
+
+
+</body></html>

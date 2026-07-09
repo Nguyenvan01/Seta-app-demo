@@ -1,0 +1,248 @@
+<!DOCTYPE html><html class="light" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Danh sách khách hàng - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="customers">
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col h-screen overflow-y-auto">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-surface-variant docked full-width top-0 border-b border-outline-variant dark:border-outline flex justify-between items-center h-16 px-gutter sticky z-10 transition-all duration-200">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-md font-headline-md font-bold text-on-surface hidden md:block">Khách hàng</h2>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-surface-variant hover:text-primary-container">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Search Bar -->
+<div class="flex-1 max-w-md mx-4 hidden sm:block">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-full py-2 pl-10 pr-4 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all" placeholder="Tìm tên, mã BN, SĐT..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary hover:bg-primary-container font-label-md text-label-md py-2 px-4 rounded-lg flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Thêm khách hàng
+                </button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a medical professional, brightly lit, high contrast, smiling slightly, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqCmZFF0R0GI4ZR-gGBaRbAzdyvsegj1VGD3RQ5Ycm0AwaiPxpTZ21RV4Wrs1xeZ5x93ekpe2fIeScdcdLv99rof9SF0K9GcT4abMIR9Vc7zQfLNezVRwupr7rphqpjONEEbXeaZOmPGo-i0seiEDGDjrLeREpVpKz1NbayyZrfeA5loRBTixFsnZrewyBN1XCes7lzp7zdzgY4JxQXV1PDVXaMBNd8Vk4M14RiAes06cQMiHR5pFQcw">
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop overflow-x-hidden">
+<!-- Filters Section -->
+<section class="mb-6 flex flex-wrap gap-4 items-center">
+<div class="relative w-full sm:w-auto min-w-[200px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="">Gói dịch vụ (Tất cả)</option>
+<option value="platinum">Platinum</option>
+<option value="premium">Premium</option>
+<option value="standard">Standard</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<div class="relative w-full sm:w-auto min-w-[200px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="">Bác sĩ phụ trách (Tất cả)</option>
+<option value="hung">BS. Hùng</option>
+<option value="lan">BS. Lan</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<div class="relative w-full sm:w-auto min-w-[200px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="">CSKH (Tất cả)</option>
+<option value="team_a">Nhóm A</option>
+<option value="team_b">Nhóm B</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<div class="relative w-full sm:w-auto min-w-[200px]">
+<select class="w-full appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md py-2 pl-4 pr-10 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary cursor-pointer">
+<option value="">Trạng thái sức khỏe (Tất cả)</option>
+<option value="stable">Ổn định</option>
+<option value="monitor">Cần theo dõi</option>
+<option value="risk">Nguy cơ</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+<button class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-2 px-2 transition-colors ml-auto">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+                    Bộ lọc nâng cao
+                </button>
+</section>
+<!-- Data Table Card -->
+<div data-seta-states data-seta-states-label="khách hàng" class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-4 font-label-md text-label-md text-secondary">Khách hàng</th>
+<th class="p-4 font-label-md text-label-md text-secondary">Mã BN</th>
+<th class="p-4 font-label-md text-label-md text-secondary">Gói dịch vụ</th>
+<th class="p-4 font-label-md text-label-md text-secondary">Bác sĩ phụ trách</th>
+<th class="p-4 font-label-md text-label-md text-secondary text-center">Cảnh báo mở</th>
+<th class="p-4 font-label-md text-label-md text-secondary">Lần tương tác gần nhất</th>
+<th class="p-4 font-label-md text-label-md text-secondary">Trạng thái tổng quan</th>
+<th class="p-4 font-label-md text-label-md text-secondary text-right">Hành động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 border border-outline-variant">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an elderly patient, smiling, well-lit, clean background, conveying health and longevity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFtHmsNceXOfOEdT_957idnjxyuPNF3-y4lsz7hcSRD8tnfd-geBU8_ii4EpTJBpP2a1BuWRILZ2U4I2F1f4k7ICQV5Zi9Hyn3lQ64DpjQeyq10g-gdAOxHwxco5M0FCWxaBtr8pqMlYYt7Uz5Fhx1WR12YUS_YWKHuEqHMy_M30MT39M9tLrE4P0k8HK9d6ufdzEDc5_e9AYPfBSc4clcrOt4FnXZqv-i2iQVVV29hQeydxPPX8iatw">
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Nguyễn Văn A</p>
+<p class="font-caption text-caption text-secondary">Nam, 65t</p>
+</div>
+</div>
+</td>
+<td class="p-4">BN-12345</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-fixed-dim">
+                                        Platinum
+                                    </span>
+</td>
+<td class="p-4">BS. Hùng</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-error text-on-error font-caption text-caption">
+                                        2
+                                    </span>
+</td>
+<td class="p-4 text-secondary">10:30 - Hôm nay</td>
+<td class="p-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container/50 border border-error-container text-on-error-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+<span class="font-caption text-caption font-semibold">Nguy cơ</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<a class="text-primary hover:text-primary-container font-label-md text-label-md border border-outline-variant hover:border-primary-container rounded-lg px-3 py-1.5 transition-colors" href="../Chi tiết khách hàng/Chi tiết khách hàng.html">
+                                        Xem hồ sơ
+                                    </a>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 border border-outline-variant">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A portrait of a middle-aged female patient, calm expression, modern clinic setting, bright soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAYvvii4gP6OWYrz-ha8rSjQw_J9ump0RnCCrZdEJ8d52XVuh6dIAnQI5bCW3Q3JOF3tJvJgMGSoxnOp7dvV6pMLs8Ke4-uwNDoRX3QuGdoJWpTThs0fXIXzeLTbKJ5Cz18WMhJ4XRLkN_CX0xOGdaSJu-tr0_elLaKWA1z9c_szjLB89hfoYqz5TBbJlVqXG0Qf0ZLH8lBpqpj7oGVV7pP1ORhYo46-lU0FcQDrRP61ICR3qaOBGs_Q">
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Trần Thị B</p>
+<p class="font-caption text-caption text-secondary">Nữ, 52t</p>
+</div>
+</div>
+</td>
+<td class="p-4">BN-67890</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption bg-secondary-fixed text-on-secondary-fixed-variant border border-secondary-fixed-dim">
+                                        Premium
+                                    </span>
+</td>
+<td class="p-4">BS. Lan</td>
+<td class="p-4 text-center">
+<span class="text-outline">-</span>
+</td>
+<td class="p-4 text-secondary">14:15 - 22/10</td>
+<td class="p-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-container border border-success-container text-on-success-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="font-caption text-caption font-semibold">Ổn định</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<a class="text-primary hover:text-primary-container font-label-md text-label-md border border-outline-variant hover:border-primary-container rounded-lg px-3 py-1.5 transition-colors" href="../Chi tiết khách hàng/Chi tiết khách hàng.html">
+                                        Xem hồ sơ
+                                    </a>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 border border-outline-variant flex items-center justify-center text-secondary font-label-md bg-surface-container-low">
+                                            L
+                                        </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Lê Văn C</p>
+<p class="font-caption text-caption text-secondary">Nam, 71t</p>
+</div>
+</div>
+</td>
+<td class="p-4">BN-11223</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption bg-surface-variant text-on-surface-variant border border-outline-variant">
+                                        Standard
+                                    </span>
+</td>
+<td class="p-4">BS. Hùng</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-error text-on-error font-caption text-caption">
+                                        1
+                                    </span>
+</td>
+<td class="p-4 text-secondary">09:00 - 20/10</td>
+<td class="p-4">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-warning-container border border-warning-container text-on-warning-container">
+<span class="material-symbols-outlined text-[16px]" data-icon="visibility">visibility</span>
+<span class="font-caption text-caption font-semibold">Cần theo dõi</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<a class="text-primary hover:text-primary-container font-label-md text-label-md border border-outline-variant hover:border-primary-container rounded-lg px-3 py-1.5 transition-colors" href="../Chi tiết khách hàng/Chi tiết khách hàng.html">
+                                        Xem hồ sơ
+                                    </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="bg-surface-container-lowest border-t border-outline-variant p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="text-secondary font-body-md text-body-md">
+                        Hiển thị <span class="font-label-md text-on-surface">1-10</span> của <span class="font-label-md text-on-surface">1200</span> khách hàng
+                    </div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-secondary font-caption text-caption">Số dòng/trang:</span>
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface font-caption text-caption py-1 pl-2 pr-6 rounded focus:outline-none focus:border-primary cursor-pointer">
+<option>10</option>
+<option>20</option>
+<option>50</option>
+</select>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-low rounded transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center font-label-md text-label-md bg-primary-container text-on-primary-container rounded">1</button>
+<button class="w-8 h-8 flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container-low rounded transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container-low rounded transition-colors">3</button>
+<span class="text-outline px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center font-body-md text-body-md text-on-surface hover:bg-surface-container-low rounded transition-colors">120</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface hover:text-primary hover:bg-surface-container-low rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

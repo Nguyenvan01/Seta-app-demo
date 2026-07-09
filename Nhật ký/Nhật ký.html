@@ -1,0 +1,331 @@
+<!DOCTYPE html><html class="light" lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nhật ký kiểm toán - SETA Longevity</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #F8FAFC; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Custom scrollbar for data tables */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="audit">
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- Header area (not TopAppBar component, just page header) -->
+<header class="bg-surface-container-lowest px-margin-desktop py-6 border-b border-outline-variant flex-shrink-0 flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Nhật ký kiểm toán</h2>
+<p class="font-body-md text-body-md text-secondary mt-1">Theo dõi và truy vết mọi hoạt động trên hệ thống.</p>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md py-2.5 px-6 rounded-lg flex items-center gap-2 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm">download</span>
+                Xuất log
+            </button>
+</header>
+<!-- Main Workspace -->
+<div class="flex-1 overflow-y-auto p-margin-desktop">
+<!-- Filter Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-5 mb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- Date Range -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">Thời gian</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">calendar_today</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Hôm nay" type="text" value="24/10/2023 - 25/10/2023">
+</div>
+</div>
+<!-- User Filter -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">Người thực hiện</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow" placeholder="Tìm theo tên/email..." type="text">
+</div>
+</div>
+<!-- Action Type -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">Loại hành động</label>
+<select class="w-full px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option value="">Tất cả hành động</option>
+<option value="create">Tạo mới</option>
+<option value="update">Chỉnh sửa</option>
+<option value="delete">Xóa</option>
+<option value="login">Đăng nhập</option>
+<option value="alert">Xử lý cảnh báo</option>
+</select>
+</div>
+<!-- Object Type -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5">Đối tượng</label>
+<select class="w-full px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option value="">Tất cả đối tượng</option>
+<option value="profile">Hồ sơ khách hàng</option>
+<option value="plan">Phác đồ điều trị</option>
+<option value="alert">Cảnh báo</option>
+<option value="user">Người dùng</option>
+</select>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="bg-surface-container-low text-on-surface font-label-md text-label-md py-1.5 px-4 rounded-full border border-outline-variant hover:bg-surface-container transition-colors text-sm">
+                        Hôm nay
+                    </button>
+<button class="bg-primary text-on-primary font-label-md text-label-md py-1.5 px-4 rounded-full border border-transparent hover:bg-primary-container transition-colors text-sm">
+                        7 ngày qua
+                    </button>
+<button class="bg-surface-container-low text-on-surface font-label-md text-label-md py-1.5 px-4 rounded-full border border-outline-variant hover:bg-surface-container transition-colors text-sm">
+                        30 ngày qua
+                    </button>
+</div>
+</div>
+<!-- Data Table Container -->
+<div data-seta-states data-seta-states-label="nhật ký" class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col h-[calc(100vh-280px)]">
+<!-- Table Header & Badge -->
+<div class="flex justify-between items-center p-4 border-b border-outline-variant bg-surface-bright flex-shrink-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">list_alt</span>
+<h3 class="font-headline-md text-body-md font-semibold text-on-surface">Kết quả tìm kiếm (1,245 bản ghi)</h3>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container text-on-surface-variant px-3 py-1 rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-xs">lock</span>
+<span class="font-caption text-caption font-medium">Bản ghi bất biến — chỉ đọc</span>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead class="bg-surface sticky top-0 z-10 border-b border-outline-variant">
+<tr>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary w-32">Thời gian</th>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary w-56">Người thực hiện</th>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary w-32">Hành động</th>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary w-40">Đối tượng</th>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary">Chi tiết thay đổi (Diff)</th>
+<th class="py-3 px-4 font-label-md text-label-md text-secondary w-40">IP / Thiết bị</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: Update -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="py-3 px-4 font-caption text-caption text-on-surface-variant align-top">
+<div class="font-medium text-on-surface">10:42:15</div>
+<div class="text-on-surface-variant">25/10/2023</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a female doctor wearing a white coat, highly detailed facial features, professional clinical setting, soft natural lighting, light-mode modern healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArgw5MtP74n_d_Hc822n1QARjjY5Pt131lUi3G-2XOwF6gV2q_bzQ2OA8fPfnxonO-uYxn0pTtLFL3hApRNlAJHy1o9DQWVFL6guB3IlMg2KIOOrWMei9rEnwEe0RCNYXzMvnCACJO_t9k3IJKy9MY9mgT_3xgVMNbKXAuesjX9S_NKe-EPy01jdg_7mu4TZjW7ZXHt7ew__tq28q8tgbnMhDP8s_uK5sQctCqO1VRC9Xdrnv0lVK7CQ">
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">BS. Lê Phương Anh</div>
+<div class="font-caption text-caption text-secondary">Chuyên gia Tế bào</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 align-top">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-warning-container text-on-warning-container border border-warning-container">
+<span class="material-symbols-outlined text-[12px] mr-1">edit</span>
+                                        Chỉnh sửa
+                                    </span>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-body-md text-on-surface text-sm">Phác đồ #PD-842</div>
+<div class="font-caption text-caption text-secondary">KH: Nguyễn Văn A</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-sm">
+<span class="text-secondary">Trạng thái:</span>
+<span class="line-through text-outline mx-1">Đang chờ</span>
+<span class="material-symbols-outlined text-xs text-secondary align-middle">arrow_forward</span>
+<span class="text-primary font-medium mx-1">Đang tiến hành</span>
+</div>
+<div class="font-caption text-caption text-secondary mt-1 truncate max-w-xs">Ghi chú: Đã bổ sung liệu pháp IV Glutathione...</div>
+</td>
+<td class="py-3 px-4 font-caption text-caption text-secondary align-top">
+<div class="">192.168.1.45</div>
+<div class="truncate w-32" title="Chrome 118, macOS">Chrome 118, macOS</div>
+</td>
+</tr>
+<!-- Row 2: Create -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group bg-surface-container-low">
+<td class="py-3 px-4 font-caption text-caption text-on-surface-variant align-top">
+<div class="font-medium text-on-surface">09:15:02</div>
+<div class="text-on-surface-variant">25/10/2023</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold text-sm">
+                                            HT
+                                        </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Hệ thống Tự động</div>
+<div class="font-caption text-caption text-secondary">Cron Job</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 align-top">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-success-container text-on-success-container border border-success-container">
+<span class="material-symbols-outlined text-[12px] mr-1">add_circle</span>
+                                        Tạo mới
+                                    </span>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-body-md text-on-surface text-sm">Cảnh báo Sinh hiệu</div>
+<div class="font-caption text-caption text-secondary">KH: Trần Thị B</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-sm">
+<span class="text-on-success-container font-medium">+ Thêm mới:</span> Cảnh báo nhịp tim bất thường (HR: 110bpm)
+                                    </div>
+</td>
+<td class="py-3 px-4 font-caption text-caption text-secondary align-top">
+<div class="">10.0.0.1 (Server)</div>
+<div class="truncate w-32">N/A</div>
+</td>
+</tr>
+<!-- Row 3: Login -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="py-3 px-4 font-caption text-caption text-on-surface-variant align-top">
+<div class="font-medium text-on-surface">08:30:44</div>
+<div class="text-on-surface-variant">25/10/2023</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a male admin in a sharp blue shirt, highly detailed facial features, professional office setting, soft natural lighting, light-mode modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzEeankw9RTHfN4Gx7wlwLECBw_g8H6W-2VDwtndRoVyIzg0D8ef4E49lBFtP91gRIHxDk38UNYzDE9ZL2Tv1YArZr_wkJ5XImWxcoCwBfx2tz7X1VzV2-1SHxUasiJOst4K6W92MQoc7aR4TqebxoWQazRajM_zpSjS4eiO83gni8ay_u7de4FNuyZcVlLd874C8YcbiFInRlNnWW0PvFSfieB6mwxHlwS1W32pptg_CORzmiFtRNTg">
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Nguyễn Văn C</div>
+<div class="font-caption text-caption text-secondary">Admin</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 align-top">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-info-container text-on-info-container border border-info-container">
+<span class="material-symbols-outlined text-[12px] mr-1">login</span>
+                                        Đăng nhập
+                                    </span>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-body-md text-on-surface text-sm">Phiên làm việc</div>
+<div class="font-caption text-caption text-secondary">ID: SESS-992</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-sm text-secondary">
+                                        Xác thực thành công (2FA via SMS)
+                                    </div>
+</td>
+<td class="py-3 px-4 font-caption text-caption text-secondary align-top">
+<div class="">113.160.44.12</div>
+<div class="truncate w-32" title="Safari 16, iOS">Safari 16, iOS</div>
+</td>
+</tr>
+<!-- Row 4: Delete -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group bg-surface-container-low">
+<td class="py-3 px-4 font-caption text-caption text-on-surface-variant align-top">
+<div class="font-medium text-on-surface">16:45:10</div>
+<div class="text-on-surface-variant">24/10/2023</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a male doctor wearing a white coat, highly detailed facial features, professional clinical setting, soft natural lighting, light-mode modern healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxSa-9pIHcqfqnFxrQTr7zsCrSCPBPRx6m740R9QbxACcBCA3gf-9_QZdKtzPp9C1w5_9vG9gTalzahbSw9W6Yzr8_ZY6F5TDCDrCifz3D8a6DAo1k6Dtu0qQutDo6WAwddT1jbUMChDVWd4MD9-pNlkkZq_Dn8GHWQcFAXOnFS7dy-3Olv0dwiw5AsRDGWk3Qh-Jejrb4yDU5aj43xT4OHj1K_I1qe1D2xYAh5FpW0TGmMO_vzIZVqA">
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">BS. Trần Trọng D</div>
+<div class="font-caption text-caption text-secondary">Trưởng khoa</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 align-top">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-error-container text-on-error-container border border-error-container">
+<span class="material-symbols-outlined text-[12px] mr-1">delete</span>
+                                        Xóa
+                                    </span>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-body-md text-on-surface text-sm">Tài liệu tham khảo</div>
+<div class="font-caption text-caption text-secondary">DOC-4412</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-sm text-secondary">
+<span class="text-on-error-container font-medium">- Đã xóa:</span> Kết quả xét nghiệm cũ (Lỗi upload sai file)
+                                    </div>
+</td>
+<td class="py-3 px-4 font-caption text-caption text-secondary align-top">
+<div class="">192.168.1.102</div>
+<div class="truncate w-32">Edge 119, Win11</div>
+</td>
+</tr>
+<!-- Row 5: Alert Handle -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="py-3 px-4 font-caption text-caption text-on-surface-variant align-top">
+<div class="font-medium text-on-surface">14:20:05</div>
+<div class="text-on-surface-variant">24/10/2023</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar of a female nurse wearing scrubs, highly detailed facial features, professional clinical setting, soft natural lighting, light-mode modern healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJDzO-Y0p2ycjiNKSIDyiCn6lndkjkLy4ZOKETWPnizVBJhAn7grQZh-_I7TfOeaRQRxE2sPgACNXNjFR9zlvsgbRkYHpjKduvrkBpWs0rrMkrBZj2nhfOY9_5TmoRG344JrxZRS0weHjV0MaznCJSHPTP9lxmQWi4FXQuH92i8NLkq4dW7ColmZbAV3sZm0bPGGD7Sa_xgkNqGOeU_7n3Fy0pVii0ZWlH5_nKrRlqK9J3-asqMN-wDA">
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">ĐD. Phạm Thị E</div>
+<div class="font-caption text-caption text-secondary">Điều dưỡng trưởng</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-4 align-top">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-tertiary-fixed text-on-tertiary-fixed-variant border border-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[12px] mr-1">notifications_active</span>
+                                        Xử lý cảnh báo
+                                    </span>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-body-md text-on-surface text-sm">Cảnh báo #AL-991</div>
+<div class="font-caption text-caption text-secondary">KH: Lê Văn F</div>
+</td>
+<td class="py-3 px-4 align-top">
+<div class="font-body-md text-sm">
+<span class="text-secondary">Trạng thái:</span>
+<span class="line-through text-outline mx-1">Mới</span>
+<span class="material-symbols-outlined text-xs text-secondary align-middle">arrow_forward</span>
+<span class="text-on-tertiary-fixed-variant font-medium mx-1">Đã xử lý</span>
+</div>
+</td>
+<td class="py-3 px-4 font-caption text-caption text-secondary align-top">
+<div class="">192.168.1.55</div>
+<div class="truncate w-32">App SETA v2.1, iPad</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-3 border-t border-outline-variant bg-surface flex items-center justify-between flex-shrink-0">
+<span class="font-caption text-caption text-secondary">Hiển thị 1-5 của 1,245</span>
+<div class="flex gap-1">
+<button class="p-1 rounded text-secondary hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded text-secondary hover:bg-surface-container font-label-md text-label-md flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded text-secondary hover:bg-surface-container font-label-md text-label-md flex items-center justify-center">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-secondary">...</span>
+<button class="p-1 rounded text-secondary hover:bg-surface-container">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

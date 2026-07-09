@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tin nhắn - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #E5E7EB;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="messages">
+<!-- Main Content Area (3-Column Layout) -->
+<main class="flex-1 flex overflow-hidden">
+<!-- Column 1: Conversation List -->
+<section data-conv-list class="w-full md:w-80 flex-shrink-0 border-r border-outline-variant bg-surface flex flex-col h-full overflow-hidden">
+<div class="p-4 border-b border-outline-variant">
+<h2 class="text-xl font-bold text-on-surface mb-4">Hội thoại</h2>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px] transition-colors group-focus-within:text-primary">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-xl pl-10 pr-4 py-2.5 text-sm focus:bg-surface focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Tìm bệnh nhân..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Active Conversation -->
+<div data-conv-open class="p-4 bg-primary-light/50 border-r-4 border-primary cursor-pointer hover:bg-primary-light transition-colors relative">
+<div class="flex gap-3">
+<div class="relative flex-shrink-0">
+<img alt="Patient Avatar" class="w-12 h-12 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEOTRtQduwfNGVLcIwogEhdFCIzGDb39wRDSVPvnkyhX6cGcwpTMf-NgUQlF8YU0wySTKQLGPcCpq5yetCtG0Z99mUMXW3gZKUTUTyWXAAfzwCLrb0JPlvHHun5_a476oqwc8MZgLozheZHxNx4OwMcYC6riuIx_WUbzo_HQL61Zt-Bo_164ppZAQ9X5ssFy9WZSnR6jcbxuBdfRlkNivzA5Uzbv4Y_dcco9qYXx1iO-PViMcxfdi5Q"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-primary rounded-full border-2 border-white"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h3 class="text-sm font-bold text-on-surface truncate">Nguyễn Văn A</h3>
+<span class="text-[10px] text-on-surface-variant font-medium">10:30</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate pr-6 mb-2">Bác sĩ cho tôi hỏi về đơn thuốc...</p>
+<div class="flex gap-1">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-error-container text-on-error-container">
+                                    CẢNH BÁO: NHỊP TIM
+                                </span>
+</div>
+</div>
+<div class="absolute top-4 right-4 bg-primary text-on-primary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">2</div>
+</div>
+</div>
+<!-- Other Conversations -->
+<div data-conv-open class="p-4 border-b border-outline-variant/50 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex gap-3">
+<div class="relative flex-shrink-0">
+<img alt="Patient Avatar" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx5GMxy-K8-AWiLMF5HhJFpJ2m2Qb5jqWQ1mCeUlw8Q8KJq26aMq7zpP98VT2DmyJASRJA4CojUdiGgUn_AhXgxD3HXju4nmRTtua3JId5A_sQg5Hhiq9ILdIVolzz51oUoLfHkWEsb5Ep0fz3rqDalnKl86l8H3-3yHODYrtrf0jXOFAzvhLPfAvBXKuWJ00LoMdg-53Kt3DMYlEa_QjxqTbeQhPGdLCLIq_hzm7esQKb4Tkasy5PGw"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h3 class="text-sm font-semibold text-on-surface truncate">Trần Thị B</h3>
+<span class="text-[10px] text-on-surface-variant font-medium">Hôm qua</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Cảm ơn bác sĩ nhiều ạ.</p>
+</div>
+</div>
+</div>
+<div data-conv-open class="p-4 border-b border-outline-variant/50 cursor-pointer hover:bg-surface-container-low transition-colors">
+<div class="flex gap-3">
+<div class="relative flex-shrink-0">
+<img alt="Patient Avatar" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUuuGrtk2s6cte2h13A4-aiEjPLwWmAp39MRNy3m2uwdBjcgMMsT4sqfZzLkmkSu6l5JHuIrxszf0swui_5oyV_CWPydqQKxpXvCih2v-SXGJTpEA9i3JFLIQ9NkGSz_cUuj5Wew_2VG9idct8qn5Z1Cq_AKs_06F38ZBpv19dGXmtXca_4Pq8FjwYuK1GPH-Nwhi8ov5CPLU1X0FsY9osgG7eb_hr5rU8hYXgw_psVhQZHvKVMuywtw"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-0.5">
+<h3 class="text-sm font-semibold text-on-surface truncate">Lê Hoàng C</h3>
+<span class="text-[10px] text-on-surface-variant font-medium">Thứ 2</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Tôi đã nhận được kết quả xét nghiệm.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Column 2: Chat Frame -->
+<section data-conv-chat class="flex-1 flex-col bg-surface-container-low overflow-hidden relative hidden md:flex">
+<!-- Chat Header -->
+<header class="h-16 px-6 border-b border-outline-variant bg-surface/80 backdrop-blur-md flex items-center justify-between sticky top-0 z-20">
+<div class="flex items-center gap-3">
+<button data-conv-back type="button" aria-label="Quay lại danh sách hội thoại" class="md:hidden -ml-1 mr-1 p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined">arrow_back</span></button>
+<div class="relative">
+<img alt="Patient" class="w-10 h-10 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEOTRtQduwfNGVLcIwogEhdFCIzGDb39wRDSVPvnkyhX6cGcwpTMf-NgUQlF8YU0wySTKQLGPcCpq5yetCtG0Z99mUMXW3gZKUTUTyWXAAfzwCLrb0JPlvHHun5_a476oqwc8MZgLozheZHxNx4OwMcYC6riuIx_WUbzo_HQL61Zt-Bo_164ppZAQ9X5ssFy9WZSnR6jcbxuBdfRlkNivzA5Uzbv4Y_dcco9qYXx1iO-PViMcxfdi5Q"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border-2 border-white"></span>
+</div>
+<div>
+<h2 class="text-sm font-bold text-on-surface">Nguyễn Văn A</h2>
+<p class="text-[11px] text-primary font-semibold">Đang trực tuyến</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">videocam</span>
+</button>
+<button class="p-2 hover:bg-surface-container rounded-full transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Alert Banner -->
+<div class="bg-error-container text-on-error-container px-6 py-2.5 flex items-center justify-between border-b border-error/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<p class="text-xs font-semibold">Hội thoại liên quan đến cảnh báo: Nhịp tim bất thường &gt; 100 bpm</p>
+</div>
+<button class="text-on-error-container hover:bg-error/10 p-1 rounded-full">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Messages List -->
+<div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+<!-- Date Separator -->
+<div class="flex items-center gap-4 my-2">
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest bg-surface-container px-3 py-1 rounded-full">Hôm nay</span>
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+</div>
+<!-- Patient Message -->
+<div class="flex items-start gap-3 max-w-[80%] self-start">
+<img class="w-8 h-8 rounded-full flex-shrink-0 mt-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEOTRtQduwfNGVLcIwogEhdFCIzGDb39wRDSVPvnkyhX6cGcwpTMf-NgUQlF8YU0wySTKQLGPcCpq5yetCtG0Z99mUMXW3gZKUTUTyWXAAfzwCLrb0JPlvHHun5_a476oqwc8MZgLozheZHxNx4OwMcYC6riuIx_WUbzo_HQL61Zt-Bo_164ppZAQ9X5ssFy9WZSnR6jcbxuBdfRlkNivzA5Uzbv4Y_dcco9qYXx1iO-PViMcxfdi5Q"/>
+<div class="flex flex-col gap-1">
+<div class="bg-surface p-3.5 rounded-2xl rounded-tl-sm border border-outline-variant shadow-sm">
+<p class="text-sm text-on-surface leading-relaxed">Chào bác sĩ, sáng nay tôi đo nhịp tim thấy hơi cao, khoảng 105 nhịp/phút. Tôi có cảm giác hơi hồi hộp.</p>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-1 font-medium">10:15 AM</span>
+</div>
+</div>
+<!-- Patient Image Message -->
+<div class="flex items-start gap-3 max-w-[80%] self-start ml-11">
+<div class="flex flex-col gap-1">
+<div class="bg-surface p-2 rounded-2xl border border-outline-variant shadow-sm">
+<img alt="Measurement result" class="w-full max-w-[280px] rounded-xl cursor-pointer hover:opacity-95 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU1oSHnBBs_XMY6hvLO2AEabG5KcAZ90LcxcjkANmpo3g1QtWf3yM2rqxdMvSUYSV-NMnH8n2movWUz6y9xVN3B3LBzlVP29Slo_-k2m7pU8SJvGeaVVarsp7R9g16mKKZmt4mT74sqeAqDpId-iwTYOy3GzF3GAq8L37DM5QOxGYahmJapgvgTTwYJU-g_xhx9OuIZ71wgA6kLfWk1pZSIi8_zso4aqYv87YTBuZh2ByPHg1InYcD6g"/>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-1 font-medium">10:16 AM</span>
+</div>
+</div>
+<!-- Staff Message -->
+<div class="flex items-start gap-3 max-w-[80%] self-end flex-row-reverse">
+<div class="flex flex-col gap-1 items-end">
+<div class="bg-primary-light text-primary-dark p-3.5 rounded-2xl rounded-tr-sm border border-primary/20 shadow-sm">
+<p class="text-sm leading-relaxed">Chào chú A, chú hãy bình tĩnh nhé. Chú có đang hoạt động mạnh hay sử dụng chất kích thích (trà, cà phê) sáng nay không ạ?</p>
+</div>
+<div class="flex items-center gap-1.5 mr-1">
+<span class="text-[10px] text-on-surface-variant font-medium">10:20 AM</span>
+<span class="material-symbols-outlined text-[16px] text-primary fill">done_all</span>
+</div>
+</div>
+</div>
+<!-- Patient Message -->
+<div class="flex items-start gap-3 max-w-[80%] self-start">
+<img class="w-8 h-8 rounded-full flex-shrink-0 mt-1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEOTRtQduwfNGVLcIwogEhdFCIzGDb39wRDSVPvnkyhX6cGcwpTMf-NgUQlF8YU0wySTKQLGPcCpq5yetCtG0Z99mUMXW3gZKUTUTyWXAAfzwCLrb0JPlvHHun5_a476oqwc8MZgLozheZHxNx4OwMcYC6riuIx_WUbzo_HQL61Zt-Bo_164ppZAQ9X5ssFy9WZSnR6jcbxuBdfRlkNivzA5Uzbv4Y_dcco9qYXx1iO-PViMcxfdi5Q"/>
+<div class="flex flex-col gap-1">
+<div class="bg-surface p-3.5 rounded-2xl rounded-tl-sm border border-outline-variant shadow-sm">
+<p class="text-sm text-on-surface leading-relaxed">Tôi vừa ngủ dậy, chỉ uống nước lọc. Bác sĩ cho tôi hỏi về đơn thuốc đang dùng có ảnh hưởng không?</p>
+</div>
+<span class="text-[10px] text-on-surface-variant ml-1 font-medium">10:30 AM</span>
+</div>
+</div>
+<!-- Typing Indicator -->
+<div class="flex items-center gap-3 self-start ml-11 mt-2">
+<div class="flex gap-1">
+<span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce"></span>
+<span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+<span class="w-1.5 h-1.5 bg-primary/40 rounded-full animate-bounce" style="animation-delay: 0.4s"></span>
+</div>
+<span class="text-[11px] text-on-surface-variant italic font-medium">Bệnh nhân đang soạn tin...</span>
+</div>
+</div>
+<!-- Chat Input Area -->
+<div class="p-6 bg-surface border-t border-outline-variant">
+<div class="flex items-end gap-3 bg-surface-container-low border border-outline-variant rounded-2xl p-2 px-3 focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary focus-within:bg-surface transition-all">
+<button class="p-2.5 text-on-surface-variant hover:text-primary hover:bg-primary-light rounded-xl transition-all">
+<span class="material-symbols-outlined text-[24px]">attach_file</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2.5 max-h-32 min-h-[40px] resize-none outline-none overflow-y-auto leading-relaxed" placeholder="Nhập tin nhắn..." rows="1"></textarea>
+<button class="p-2.5 bg-primary text-on-primary rounded-xl shadow-lg shadow-primary/30 hover:bg-primary-dark transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px] fill">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Column 3: Quick Profile -->
+<aside class="w-[320px] flex-shrink-0 bg-surface border-l border-outline-variant hidden xl:flex flex-col h-full overflow-y-auto">
+<!-- Header/Avatar -->
+<div class="p-8 flex flex-col items-center border-b border-outline-variant">
+<div class="relative mb-4">
+<img alt="Patient Avatar" class="w-28 h-28 rounded-full object-cover border-4 border-white shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJEOTRtQduwfNGVLcIwogEhdFCIzGDb39wRDSVPvnkyhX6cGcwpTMf-NgUQlF8YU0wySTKQLGPcCpq5yetCtG0Z99mUMXW3gZKUTUTyWXAAfzwCLrb0JPlvHHun5_a476oqwc8MZgLozheZHxNx4OwMcYC6riuIx_WUbzo_HQL61Zt-Bo_164ppZAQ9X5ssFy9WZSnR6jcbxuBdfRlkNivzA5Uzbv4Y_dcco9qYXx1iO-PViMcxfdi5Q"/>
+</div>
+<h3 class="text-xl font-bold text-on-surface">Nguyễn Văn A</h3>
+<p class="text-xs font-semibold text-on-surface-variant tracking-wider uppercase mt-1">BN-2023-094</p>
+<div class="mt-4 px-4 py-1.5 bg-info-container text-on-info-container text-[11px] font-bold rounded-full border border-info-container uppercase tracking-widest">
+                    Gói: Platinum
+                </div>
+</div>
+<!-- Profile Content -->
+<div class="flex-1 p-6 space-y-8">
+<!-- Clinician -->
+<div>
+<h4 class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">medical_services</span>
+                        Bác sĩ phụ trách
+                    </h4>
+<div class="flex items-center gap-3 bg-surface-container-low p-3 rounded-xl border border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">person</span>
+</div>
+<span class="text-sm font-bold text-on-surface">Bs. Minh Hùng</span>
+</div>
+</div>
+<!-- Treatment Plan -->
+<div>
+<h4 class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">prescriptions</span>
+                        Phác đồ hiện tại
+                    </h4>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-sm font-medium text-on-surface">Omega 3-6-9 (Sáng/Tối)</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-low rounded-xl border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-sm font-medium text-on-surface">Vitamin D3 1000IU</span>
+</div>
+</div>
+</div>
+<!-- Open Alerts -->
+<div>
+<h4 class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-error">notifications_active</span>
+                        Cảnh báo mở
+                    </h4>
+<div class="p-3 bg-error-container/30 rounded-xl border border-error/10">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error text-[18px] mt-0.5">favorite</span>
+<div>
+<p class="text-sm font-bold text-on-error-container">Nhịp tim cao (&gt;100 bpm)</p>
+<p class="text-[10px] text-on-surface-variant mt-1 font-medium">Phát hiện: 10:10 AM hôm nay</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Profile Actions -->
+<div class="p-6 border-t border-outline-variant bg-surface-container-low/50 sticky bottom-0">
+<div class="grid grid-cols-1 gap-3">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary px-4 py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:bg-primary-dark transition-all">
+<span class="material-symbols-outlined text-[18px]">folder_shared</span>
+                        Mở hồ sơ đầy đủ
+                    </button>
+<button class="w-full flex items-center justify-center gap-2 bg-surface border-2 border-primary text-primary px-4 py-3 rounded-xl font-bold text-sm hover:bg-primary-light transition-all">
+<span class="material-symbols-outlined text-[18px]">add_alert</span>
+                        Tạo cảnh báo
+                    </button>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html><html lang="vi"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Báo cáo & Thống kê - SETA Longevity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="../shared/tailwind.config.js"></script>
+<script src="../shared/seta-layout.js" defer></script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #f8fafc; }
+        .report-bar { min-width: 8px; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-background text-on-surface antialiased" data-seta-active="reports">
+<main class="flex-1 flex flex-col overflow-hidden">
+<header class="bg-surface border-b border-outline-variant h-16 px-margin-desktop flex items-center justify-between flex-shrink-0">
+<div>
+<h1 class="text-headline-md font-bold text-on-surface">Báo cáo &amp; Thống kê</h1>
+<p class="text-caption text-on-surface-variant">Hiệu quả chăm sóc, cảnh báo và vận hành</p>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-label-md hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+Xuất báo cáo
+</button>
+</header>
+<div class="flex-1 overflow-y-auto custom-scrollbar p-margin-desktop space-y-6">
+<section class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm flex flex-wrap items-end gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-label-md text-on-surface-variant">Khoảng thời gian</label>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none min-w-[180px]">
+<option>30 ngày gần nhất</option>
+<option>Quý hiện tại</option>
+<option>Năm hiện tại</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-label-md text-on-surface-variant">Gói dịch vụ</label>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none min-w-[160px]">
+<option>Tất cả gói</option>
+<option>Platinum</option>
+<option>Premium</option>
+<option>Standard</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-label-md text-on-surface-variant">Nhóm phụ trách</label>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-2 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none min-w-[180px]">
+<option>Tất cả nhóm</option>
+<option>Bác sĩ</option>
+<option>CSKH</option>
+<option>Điều phối</option>
+</select>
+</div>
+<button class="bg-surface-container text-on-surface px-4 py-2 rounded-lg text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+Áp dụng
+</button>
+</section>
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<p class="text-label-md text-on-surface-variant">Tỷ lệ xử lý cảnh báo</p>
+<div class="flex items-end justify-between mt-2">
+<p class="text-headline-lg text-on-surface">91.6%</p>
+<span class="text-caption text-success bg-success-container px-2 py-1 rounded">+3.1%</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<p class="text-label-md text-on-surface-variant">Thời gian phản hồi TB</p>
+<div class="flex items-end justify-between mt-2">
+<p class="text-headline-lg text-on-surface">7.4p</p>
+<span class="text-caption text-success bg-success-container px-2 py-1 rounded">-1.2p</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<p class="text-label-md text-on-surface-variant">Tuân thủ phác đồ</p>
+<div class="flex items-end justify-between mt-2">
+<p class="text-headline-lg text-on-surface">86.8%</p>
+<span class="text-caption text-warning bg-warning-container px-2 py-1 rounded">-0.8%</span>
+</div>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-4 shadow-sm">
+<p class="text-label-md text-on-surface-variant">Khách hàng nguy cơ cao</p>
+<div class="flex items-end justify-between mt-2">
+<p class="text-headline-lg text-error">42</p>
+<span class="text-caption text-error bg-error-container px-2 py-1 rounded">+6</span>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<div data-seta-states data-seta-states-label="biểu đồ" class="xl:col-span-8 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant flex items-center justify-between">
+<div>
+<h2 class="text-headline-md text-on-surface">Xu hướng cảnh báo</h2>
+<p class="text-caption text-on-surface-variant">Số cảnh báo phát sinh và đã xử lý theo tuần</p>
+</div>
+<div class="flex items-center gap-3 text-caption text-on-surface-variant">
+<span class="flex items-center gap-1"><i class="w-2.5 h-2.5 bg-error rounded-full"></i>Phát sinh</span>
+<span class="flex items-center gap-1"><i class="w-2.5 h-2.5 bg-primary rounded-full"></i>Đã xử lý</span>
+</div>
+</div>
+<div class="p-5">
+<div class="h-72 overflow-x-auto">
+<svg aria-label="Biểu đồ đường xu hướng cảnh báo theo 8 tuần" class="min-w-[680px] w-full h-full" role="img" viewBox="0 0 720 280">
+<rect fill="#ffffff" height="280" width="720"></rect>
+<!-- Gridlines -->
+<g stroke="#e2e8f0" stroke-width="1">
+<line x1="56" x2="690" y1="30" y2="30"></line>
+<line x1="56" x2="690" y1="75" y2="75"></line>
+<line x1="56" x2="690" y1="120" y2="120"></line>
+<line x1="56" x2="690" y1="165" y2="165"></line>
+<line x1="56" x2="690" y1="210" y2="210"></line>
+</g>
+<!-- Y-axis labels -->
+<g fill="#475569" font-family="Be Vietnam Pro" font-size="12">
+<text x="18" y="34">80</text>
+<text x="18" y="79">60</text>
+<text x="18" y="124">40</text>
+<text x="18" y="169">20</text>
+<text x="26" y="214">0</text>
+<!-- X-axis labels -->
+<text text-anchor="middle" x="60" y="248">T1</text>
+<text text-anchor="middle" x="150" y="248">T2</text>
+<text text-anchor="middle" x="240" y="248">T3</text>
+<text text-anchor="middle" x="330" y="248">T4</text>
+<text text-anchor="middle" x="420" y="248">T5</text>
+<text text-anchor="middle" x="510" y="248">T6</text>
+<text text-anchor="middle" x="600" y="248">T7</text>
+<text text-anchor="middle" x="690" y="248">T8</text>
+</g>
+<!-- Lines: Phát sinh (error/red) and Đã xử lý (primary/blue) -->
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+<polyline points="60,101 150,83 240,62 330,117 420,74 510,93 600,128 690,105" stroke="#dc2626"></polyline>
+<polyline points="60,128 150,110 240,93 330,78 420,62 510,50 600,72 690,65" stroke="#2563eb"></polyline>
+</g>
+<!-- Data point circles -->
+<g stroke="#ffffff" stroke-width="3">
+<circle cx="60" cy="101" fill="#dc2626" r="5"><title>Tuần 1 · Phát sinh: 58</title></circle>
+<circle cx="150" cy="83" fill="#dc2626" r="5"><title>Tuần 2 · Phát sinh: 64</title></circle>
+<circle cx="240" cy="62" fill="#dc2626" r="5"><title>Tuần 3 · Phát sinh: 72</title></circle>
+<circle cx="330" cy="117" fill="#dc2626" r="5"><title>Tuần 4 · Phát sinh: 54</title></circle>
+<circle cx="420" cy="74" fill="#dc2626" r="5"><title>Tuần 5 · Phát sinh: 68</title></circle>
+<circle cx="510" cy="93" fill="#dc2626" r="5"><title>Tuần 6 · Phát sinh: 61</title></circle>
+<circle cx="600" cy="128" fill="#dc2626" r="5"><title>Tuần 7 · Phát sinh: 49</title></circle>
+<circle cx="690" cy="105" fill="#dc2626" r="5"><title>Tuần 8 · Phát sinh: 57</title></circle>
+<circle cx="60" cy="128" fill="#2563eb" r="5"><title>Tuần 1 · Đã xử lý: 49</title></circle>
+<circle cx="150" cy="110" fill="#2563eb" r="5"><title>Tuần 2 · Đã xử lý: 56</title></circle>
+<circle cx="240" cy="93" fill="#2563eb" r="5"><title>Tuần 3 · Đã xử lý: 61</title></circle>
+<circle cx="330" cy="78" fill="#2563eb" r="5"><title>Tuần 4 · Đã xử lý: 67</title></circle>
+<circle cx="420" cy="62" fill="#2563eb" r="5"><title>Tuần 5 · Đã xử lý: 72</title></circle>
+<circle cx="510" cy="50" fill="#2563eb" r="5"><title>Tuần 6 · Đã xử lý: 77</title></circle>
+<circle cx="600" cy="72" fill="#2563eb" r="5"><title>Tuần 7 · Đã xử lý: 70</title></circle>
+<circle cx="690" cy="65" fill="#2563eb" r="5"><title>Tuần 8 · Đã xử lý: 74</title></circle>
+</g>
+<!-- Peak value labels -->
+<g fill="#0f172a" font-family="Be Vietnam Pro" font-size="12" font-weight="600">
+<text x="246" y="54">72</text>
+<text x="516" y="42">77</text>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<div data-seta-states data-seta-states-label="cơ cấu khách hàng" class="xl:col-span-4 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant">
+<h2 class="text-headline-md text-on-surface">Cơ cấu khách hàng</h2>
+<p class="text-caption text-on-surface-variant">Theo gói dịch vụ đang hoạt động</p>
+</div>
+<div class="p-5 space-y-5">
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>Platinum</span><span>38%</span></div>
+<div class="h-3 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-primary rounded-full w-[38%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>Premium</span><span>44%</span></div>
+<div class="h-3 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-info rounded-full w-[44%]"></div></div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-2"><span>Standard</span><span>18%</span></div>
+<div class="h-3 rounded-full bg-surface-container overflow-hidden"><div class="h-full bg-warning rounded-full w-[18%]"></div></div>
+</div>
+<div class="pt-4 border-t border-outline-variant grid grid-cols-3 gap-3 text-center">
+<div><p class="text-headline-md text-on-surface">412</p><p class="text-caption text-on-surface-variant">Platinum</p></div>
+<div><p class="text-headline-md text-on-surface">521</p><p class="text-caption text-on-surface-variant">Premium</p></div>
+<div><p class="text-headline-md text-on-surface">315</p><p class="text-caption text-on-surface-variant">Standard</p></div>
+</div>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+<div data-seta-states data-seta-states-label="hiệu quả nhóm" class="xl:col-span-7 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant">
+<h2 class="text-headline-md text-on-surface">Hiệu quả theo nhóm</h2>
+<p class="text-caption text-on-surface-variant">So sánh xử lý, SLA và mức hài lòng</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left whitespace-nowrap">
+<thead class="bg-surface-container border-b border-outline-variant">
+<tr>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">Nhóm</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">Ca xử lý</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">SLA</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">CSAT</th>
+<th class="px-4 py-3 text-label-md text-on-surface-variant">Tồn mở</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low"><td class="px-4 py-3 font-semibold">Bác sĩ</td><td class="px-4 py-3">684</td><td class="px-4 py-3 text-success">96.1%</td><td class="px-4 py-3">4.8/5</td><td class="px-4 py-3">24</td></tr>
+<tr class="hover:bg-surface-container-low"><td class="px-4 py-3 font-semibold">CSKH</td><td class="px-4 py-3">1,124</td><td class="px-4 py-3 text-success">94.7%</td><td class="px-4 py-3">4.7/5</td><td class="px-4 py-3">31</td></tr>
+<tr class="hover:bg-surface-container-low"><td class="px-4 py-3 font-semibold">Điều phối</td><td class="px-4 py-3">318</td><td class="px-4 py-3 text-warning">88.2%</td><td class="px-4 py-3">4.5/5</td><td class="px-4 py-3">17</td></tr>
+<tr class="hover:bg-surface-container-low"><td class="px-4 py-3 font-semibold">Chuyên gia dinh dưỡng</td><td class="px-4 py-3">246</td><td class="px-4 py-3 text-success">92.9%</td><td class="px-4 py-3">4.6/5</td><td class="px-4 py-3">9</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="xl:col-span-5 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="px-5 py-4 border-b border-outline-variant">
+<h2 class="text-headline-md text-on-surface">Chỉ số sức khỏe nổi bật</h2>
+<p class="text-caption text-on-surface-variant">Tỷ lệ khách hàng cải thiện trong kỳ</p>
+</div>
+<div class="p-5 space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-success-container text-success flex items-center justify-center"><span class="material-symbols-outlined">favorite</span></div>
+<div class="flex-1"><div class="flex justify-between text-label-md mb-1"><span>Huyết áp ổn định</span><span>72%</span></div><div class="h-2 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-success rounded-full w-[72%]"></div></div></div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-info-container text-info flex items-center justify-center"><span class="material-symbols-outlined">water_drop</span></div>
+<div class="flex-1"><div class="flex justify-between text-label-md mb-1"><span>Glucose trong ngưỡng</span><span>68%</span></div><div class="h-2 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-info rounded-full w-[68%]"></div></div></div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-warning-container text-warning flex items-center justify-center"><span class="material-symbols-outlined">directions_run</span></div>
+<div class="flex-1"><div class="flex justify-between text-label-md mb-1"><span>Hoạt động đạt mục tiêu</span><span>61%</span></div><div class="h-2 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-warning rounded-full w-[61%]"></div></div></div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-error-container text-error flex items-center justify-center"><span class="material-symbols-outlined">bedtime</span></div>
+<div class="flex-1"><div class="flex justify-between text-label-md mb-1"><span>Giấc ngủ cần theo dõi</span><span>29%</span></div><div class="h-2 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-error rounded-full w-[29%]"></div></div></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>
