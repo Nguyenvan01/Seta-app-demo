@@ -2,22 +2,22 @@
   const activeClass = "flex items-center gap-3 px-4 py-2.5 text-primary-container font-bold bg-primary/10 rounded-lg mx-2 transition-all duration-200";
   const inactiveClass = "flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors rounded-lg mx-2";
   const basePath = document.body.dataset.setaBase || "..";
-  const logoWhite = `${basePath}/Logo seta trắng.png`;
+  const logoWhite = `${basePath}/Logo seta trắng.png`;
   const avatar = "https://lh3.googleusercontent.com/aida-public/AB6AXuBGCW0id1AQFbNNXyhpIsYTDsqelx0djpk90vgVRtRWI13Z1eSZBwsL5y7vpMozWt3V24Sq2NHUhls2Jsw5coffRuhj-5ZJwH3awFpehUrLNP783ApAJkSRRXpf2Weey3mmU13G4K1xeHZISCweDUZo9yfj0hwfhoMMQWCjoZEJTGeuatYKRw2bleW6OJMeIDp2bnZZxlbIpyd926Lfu2GL6hZofZzhgvatiBLk3uCE2GUYpJYcoXcofA";
 
   const navGroups = [
     [
       { key: "dashboard", label: "Bảng điều khiển", icon: "dashboard", href: `${basePath}/Bảng điều khiển/Bảng điều khiển.html` },
-      { key: "alerts", label: "Cảnh báo", icon: "notifications_active", href: `${basePath}/Chức năng cảnh báo/Chức năng cảnh báo.html`, badge: { text: "12", className: "bg-error text-on-error" } },
-      { key: "customers", label: "Khách hàng", icon: "groups", href: `${basePath}/Danh sách khách hàng/Danh sách khách hàng.html` },
-      { key: "plans", label: "Phác đồ & Lịch", icon: "calendar_today", href: `${basePath}/Thiết lập phác đồ/Thiết lập phác đồ.html` },
-      { key: "interactions", label: "Tương tác", icon: "forum", href: `${basePath}/Lịch sử tương tác/Lịch sử tương tác.html` },
-      { key: "messages", label: "Tin nhắn", icon: "mail", href: `${basePath}/Hội thoại tư vấn/Hội thoại tư vấn.html`, badge: { text: "5", className: "bg-info text-on-primary" } },
+      { key: "alerts", label: "Cảnh báo", icon: "notifications_active", href: `${basePath}/Chức năng cảnh báo/Chức năng cảnh báo.html`, badge: { text: "12", className: "bg-error text-on-error" } },
+      { key: "customers", label: "Khách hàng", icon: "groups", href: `${basePath}/Danh sách khách hàng/Danh sách khách hàng.html` },
+      { key: "plans", label: "Phác đồ & Lịch", icon: "calendar_today", href: `${basePath}/Thiết lập phác đồ/Thiết lập phác đồ.html` },
+      { key: "interactions", label: "Tương tác", icon: "forum", href: `${basePath}/Lịch sử tương tác/Lịch sử tương tác.html` },
+      { key: "messages", label: "Tin nhắn", icon: "mail", href: `${basePath}/Hội thoại tư vấn/Hội thoại tư vấn.html`, badge: { text: "5", className: "bg-info text-on-primary" } },
       { key: "reports", label: "Báo cáo & Thống kê", icon: "analytics", href: `${basePath}/Báo cáo thống kê/Báo cáo thống kê.html` }
     ],
     [
-      { key: "users", label: "Người dùng & quyền", icon: "person", href: `${basePath}/Quản lý ngừoi dùng/Quản lý ngừoi dùng.html` },
-      { key: "audit", label: "Nhật ký kiểm toán", icon: "history", href: `${basePath}/Nhật ký/Nhật ký.html` },
+      { key: "users", label: "Người dùng & quyền", icon: "person", href: `${basePath}/Quản lý ngừoi dùng/Quản lý ngừoi dùng.html` },
+      { key: "audit", label: "Nhật ký kiểm toán", icon: "history", href: `${basePath}/Nhật ký/Nhật ký.html` },
       { key: "monitoring", label: "Giám sát hệ thống", icon: "monitoring", href: "#" }
     ]
   ];
