@@ -475,7 +475,7 @@
   function collectCards() {
     const cards = [];
     document.querySelectorAll('[class*="rounded-xl"],[class*="rounded-2xl"]').forEach((el) => {
-      const c = el.className || "";
+      const c = el.getAttribute("class") || ""; // SVG className is not a string
       if (!/bg-surface|shadow/.test(c)) return;
       if (el.closest("[data-seta-sidebar]")) return;
       if (el.offsetHeight < 44) return;
@@ -509,7 +509,7 @@
     // 2) Animated fill bars: capture target %, collapse, grow on reveal
     const bars = [];
     document.querySelectorAll('[class*="w-["]').forEach((el) => {
-      const c = el.className || "";
+      const c = el.getAttribute("class") || ""; // SVG className is not a string
       const pm = c.match(/w-\[(\d+(?:\.\d+)?)%\]/);
       if (!pm) return;
       if (!/rounded-full/.test(c) || !/bg-/.test(c)) return;
@@ -597,6 +597,108 @@
     }, 1600);
   }
 
+  // ---- Motion: animated SVG line charts (draw-on + points pop-in) --------
+  const DRAW_MS = 1200;
+
+  function prepChart(svg) {
+    const lines = svg.querySelectorAll("polyline, polygon, path");
+    const dots = svg.querySelectorAll("circle");
+    lines.forEach((ln) => {
+      const stroke = ln.getAttribute("stroke");
+      const fill = ln.getAttribute("fill");
+      if ((stroke === null || stroke === "none") && fill && fill !== "none") {
+        ln.dataset.setaKind = "area";
+        ln.style.opacity = "0";
+        ln.style.transformBox = "fill-box";
+        ln.style.transformOrigin = "bottom";
+        ln.style.transform = "scaleY(.6)";
+        return;
+      }
+      let len;
+      try { len = ln.getTotalLength(); } catch (e) { return; }
+      if (!len) return;
+      ln.dataset.setaLen = len;
+      ln.style.strokeDasharray = len;
+      ln.style.strokeDashoffset = len;
+    });
+    dots.forEach((c) => {
+      c.style.transformBox = "fill-box";
+      c.style.transformOrigin = "center";
+      c.style.transform = "scale(0)";
+      c.style.opacity = "0";
+    });
+  }
+
+  function revealChart(svg) {
+    const lines = Array.prototype.slice.call(svg.querySelectorAll("polyline, polygon, path"));
+    const dots = Array.prototype.slice.call(svg.querySelectorAll("circle"));
+    let minX = Infinity, maxX = -Infinity;
+    dots.forEach((c) => {
+      const x = parseFloat(c.getAttribute("cx"));
+      if (isFinite(x)) { minX = Math.min(minX, x); maxX = Math.max(maxX, x); }
+    });
+    const span = maxX - minX || 1;
+
+    let strokeIdx = 0;
+    lines.forEach((ln) => {
+      if (ln.dataset.setaKind === "area") {
+        ln.style.transition = "opacity .7s ease-out, transform .7s cubic-bezier(.16,.84,.44,1)";
+        ln.style.transitionDelay = "250ms";
+        ln.style.opacity = "1";
+        ln.style.transform = "none";
+        return;
+      }
+      if (!ln.dataset.setaLen) return;
+      ln.getBoundingClientRect(); // force reflow so the transition runs
+      ln.style.transition = "stroke-dashoffset " + DRAW_MS + "ms cubic-bezier(.22,.61,.36,1)";
+      ln.style.transitionDelay = strokeIdx++ * 120 + "ms";
+      ln.style.strokeDashoffset = "0";
+    });
+
+    dots.forEach((c) => {
+      const x = parseFloat(c.getAttribute("cx"));
+      const t = isFinite(x) ? (x - minX) / span : 0;
+      window.setTimeout(() => {
+        c.style.transition = "transform .35s cubic-bezier(.34,1.56,.64,1), opacity .25s ease";
+        c.style.transform = "scale(1)";
+        c.style.opacity = "1";
+      }, 200 + t * DRAW_MS);
+    });
+  }
+
+  function wireCharts() {
+    if (prefersReducedMotion()) return;
+    // Layout-independent selection: real charts have a line series or several
+    // points. (getTotalLength / cx use SVG geometry, so height isn't needed.)
+    const charts = Array.prototype.slice
+      .call(document.querySelectorAll("svg"))
+      .filter((s) => s.querySelector("polyline, polygon, path") || s.querySelectorAll("circle").length >= 3);
+    if (!charts.length) return;
+
+    // Hide lines/points up front so charts never flash fully-drawn first.
+    charts.forEach((svg) => { try { prepChart(svg); } catch (e) {} });
+
+    const play = (svg) => {
+      if (svg.dataset.setaCharted) return;
+      svg.dataset.setaCharted = "1";
+      try { revealChart(svg); } catch (e) {}
+    };
+
+    if (!("IntersectionObserver" in window)) { charts.forEach(play); return; }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { play(en.target); io.unobserve(en.target); } });
+    }, { threshold: 0.25 });
+    charts.forEach((svg) => io.observe(svg));
+    // Safety: if a chart is already on-screen but the observer missed it, draw it.
+    window.setTimeout(() => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      charts.forEach((svg) => {
+        const r = svg.getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) play(svg);
+      });
+    }, 1800);
+  }
+
   function init() {
     injectBaseStyles();
 
@@ -607,7 +709,8 @@
     wireStates();
     wireForms();
     wireConversation();
-    wireMotion();
+    try { wireMotion(); } catch (e) {}
+    try { wireCharts(); } catch (e) {}
   }
 
   // Inject styles as early as possible so reveal hidden-state is set before paint.
