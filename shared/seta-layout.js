@@ -120,6 +120,43 @@
         .seta-skel::after { animation: none; }
       }
       @keyframes seta-shimmer { 100% { transform: translateX(100%); } }
+
+      /* ---- Motion layer (scroll reveal / hover / press / bars) ---------- */
+      [data-seta-reveal] { opacity: 0; transform: translateY(16px); will-change: opacity, transform; }
+      [data-seta-reveal].seta-in {
+        opacity: 1; transform: none;
+        transition: opacity .55s cubic-bezier(.16,.84,.44,1), transform .55s cubic-bezier(.16,.84,.44,1);
+        transition-delay: var(--seta-delay, 0ms);
+      }
+      /* Above-the-fold load-in (CSS-only; always ends visible) */
+      .seta-loadin { animation: seta-rise-in .55s cubic-bezier(.16,.84,.44,1) both; }
+      @keyframes seta-rise-in { from { opacity:0; transform: translateY(16px); } to { opacity:1; transform:none; } }
+      /* Card hover lift */
+      .seta-lift { transition: transform .25s ease, box-shadow .25s ease; }
+      .seta-lift:hover { transform: translateY(-4px); box-shadow: 0 14px 28px -14px rgba(2,6,23,.28); }
+      /* Press feedback on interactive controls */
+      button, [role="button"] { transition: transform .12s ease; }
+      button:not([disabled]):active, [role="button"]:active { transform: scale(.97); }
+      /* Animated fill bars */
+      [data-seta-bar] { transition: width 1.1s cubic-bezier(.16,.84,.44,1); }
+      /* Sidebar entrance + staggered nav items */
+      [data-seta-sidebar] { animation: seta-slide-x .45s cubic-bezier(.16,.84,.44,1) both; }
+      [data-seta-sidebar] nav li { animation: seta-rise .4s ease-out both; }
+      [data-seta-sidebar] nav li:nth-child(1){animation-delay:.04s}
+      [data-seta-sidebar] nav li:nth-child(2){animation-delay:.08s}
+      [data-seta-sidebar] nav li:nth-child(3){animation-delay:.12s}
+      [data-seta-sidebar] nav li:nth-child(4){animation-delay:.16s}
+      [data-seta-sidebar] nav li:nth-child(5){animation-delay:.20s}
+      [data-seta-sidebar] nav li:nth-child(6){animation-delay:.24s}
+      [data-seta-sidebar] nav li:nth-child(7){animation-delay:.28s}
+      [data-seta-sidebar] nav li:nth-child(8){animation-delay:.32s}
+      @keyframes seta-slide-x { from { opacity:0; transform: translateX(-14px); } to { opacity:1; transform:none; } }
+      @keyframes seta-rise { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:none; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        [data-seta-reveal] { opacity: 1 !important; transform: none !important; }
+        [data-seta-sidebar], [data-seta-sidebar] nav li { animation: none !important; }
+      }
     `;
     document.head.appendChild(style);
   }
@@ -379,6 +416,187 @@
     });
   }
 
+  // ---- Motion: scroll reveal, count-up, animated bars, hover lift --------
+  const prefersReducedMotion = () =>
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function parseNumberFormat(text) {
+    const m = text.match(/^(\s*[^\d\-]*)(-?\d[\d.,\s]*\d|-?\d)(\s*[^\d]*)$/);
+    if (!m) return null;
+    const prefix = m[1], suffix = m[3];
+    // Skip prose: a word of 3+ letters means this is a sentence, not a stat.
+    if (/[A-Za-zÀ-ỹ]{3,}/.test(prefix + suffix)) return null;
+    let core = m[2].replace(/\s/g, "");
+    let groupSep = "", decimalSep = "", decimals = 0, value;
+    if (/^-?\d{1,3}([.,]\d{3})+([.,]\d+)?$/.test(core)) {
+      // grouped thousands, e.g. 1.284 or 1,284,000.50
+      const seps = core.replace(/\d|-/g, "");
+      groupSep = seps[0];
+      if (new Set(seps).size > 1) decimalSep = seps[seps.length - 1];
+      const norm = core.split(groupSep).join("");
+      value = parseFloat(decimalSep ? norm.replace(decimalSep, ".") : norm);
+      decimals = decimalSep ? core.split(decimalSep)[1].length : 0;
+    } else if (/^-?\d+[.,]\d+$/.test(core)) {
+      // single separator => decimal, e.g. 4.9 or 12,5
+      decimalSep = core.replace(/\d|-/g, "");
+      decimals = core.split(decimalSep)[1].length;
+      value = parseFloat(core.replace(decimalSep, "."));
+    } else if (/^-?\d+$/.test(core)) {
+      value = parseInt(core, 10);
+    } else {
+      return null;
+    }
+    if (!isFinite(value)) return null;
+    return { prefix, suffix, value, decimals, groupSep, decimalSep };
+  }
+
+  function formatLike(n, fmt) {
+    let s = Math.abs(n).toFixed(fmt.decimals);
+    let intPart = s, frac = "";
+    if (fmt.decimals) { const p = s.split("."); intPart = p[0]; frac = p[1]; }
+    if (fmt.groupSep) intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, fmt.groupSep);
+    let out = intPart + (fmt.decimals ? (fmt.decimalSep || ".") + frac : "");
+    if (n < 0) out = "-" + out;
+    return fmt.prefix + out + fmt.suffix;
+  }
+
+  function countUp(el, fmt) {
+    const dur = 1100, start = performance.now();
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    function frame(now) {
+      const t = Math.min(1, (now - start) / dur);
+      el.textContent = formatLike(fmt.value * ease(t), fmt);
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = formatLike(fmt.value, fmt);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function collectCards() {
+    const cards = [];
+    document.querySelectorAll('[class*="rounded-xl"],[class*="rounded-2xl"]').forEach((el) => {
+      const c = el.className || "";
+      if (!/bg-surface|shadow/.test(c)) return;
+      if (el.closest("[data-seta-sidebar]")) return;
+      if (el.offsetHeight < 44) return;
+      // Only top-level cards: skip if an ancestor is already a reveal card
+      if (el.parentElement && el.parentElement.closest("[data-seta-reveal]")) return;
+      cards.push(el);
+    });
+    return cards;
+  }
+
+  function wireMotion() {
+    if (prefersReducedMotion()) return;
+
+    // 1) Split cards into above-the-fold (CSS load-in, always ends visible)
+    //    and below-the-fold (reveal on scroll via IntersectionObserver).
+    const cards = collectCards();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const aboveFold = [], belowFold = [];
+    cards.forEach((el) => {
+      el.classList.add("seta-lift");
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.95 && r.bottom > 0) aboveFold.push(el);
+      else { el.setAttribute("data-seta-reveal", ""); belowFold.push(el); }
+    });
+    // Stagger the visible cards on load — guaranteed to end visible.
+    aboveFold.forEach((el, i) => {
+      el.style.animationDelay = Math.min(i, 8) * 55 + "ms";
+      el.classList.add("seta-loadin");
+    });
+
+    // 2) Animated fill bars: capture target %, collapse, grow on reveal
+    const bars = [];
+    document.querySelectorAll('[class*="w-["]').forEach((el) => {
+      const c = el.className || "";
+      const pm = c.match(/w-\[(\d+(?:\.\d+)?)%\]/);
+      if (!pm) return;
+      if (!/rounded-full/.test(c) || !/bg-/.test(c)) return;
+      el.style.width = "0%";
+      bars.push({ el: el, target: pm[1] + "%" });
+    });
+
+    // 3) Count-up: numeric stat text in prominent typography
+    const counters = [];
+    document
+      .querySelectorAll('[class*="text-2xl"],[class*="text-3xl"],[class*="text-4xl"],[class*="text-5xl"],[class*="display-"],[class*="headline-"]')
+      .forEach((el) => {
+        if (el.children.length) return; // leaf text only
+        if (el.closest("[data-seta-sidebar]")) return;
+        const fmt = parseNumberFormat(el.textContent.trim());
+        if (!fmt || fmt.value === 0) return;
+        el.textContent = formatLike(0, fmt);
+        counters.push({ el: el, fmt: fmt });
+      });
+
+    const playedBar = new WeakSet();
+    const playedCount = new WeakSet();
+    function playBarsIn(root) {
+      bars.forEach((b) => {
+        if (playedBar.has(b.el)) return;
+        if (root === document || root.contains(b.el)) { b.el.style.width = b.target; playedBar.add(b.el); }
+      });
+    }
+    function playCountsIn(root) {
+      counters.forEach((c) => {
+        if (playedCount.has(c.el)) return;
+        if (root === document || root.contains(c.el)) { countUp(c.el, c.fmt); playedCount.add(c.el); }
+      });
+    }
+
+    // Play bars/counters that live inside already-visible cards right away.
+    aboveFold.forEach((el) => { playBarsIn(el); playCountsIn(el); });
+
+    const supportsIO = "IntersectionObserver" in window;
+    if (!supportsIO) {
+      belowFold.forEach((el) => el.classList.add("seta-in"));
+      playBarsIn(document);
+      playCountsIn(document);
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        // Stagger siblings within the same parent
+        const sibs = Array.prototype.filter.call(
+          el.parentElement ? el.parentElement.children : [el],
+          (n) => n.hasAttribute && n.hasAttribute("data-seta-reveal")
+        );
+        const idx = Math.max(0, sibs.indexOf(el));
+        el.style.setProperty("--seta-delay", Math.min(idx, 8) * 45 + "ms");
+        el.classList.add("seta-in");
+        playBarsIn(el);
+        playCountsIn(el);
+        io.unobserve(el);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+    belowFold.forEach((el) => io.observe(el));
+
+    // Bars / counters not inside a tracked card: reveal on their own
+    const orphanIO = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        playBarsIn(entry.target);
+        playCountsIn(entry.target);
+        orphanIO.unobserve(entry.target);
+      });
+    }, { threshold: 0.1 });
+    bars.concat(counters).forEach((o) => {
+      if (!o.el.closest("[data-seta-reveal]")) orphanIO.observe(o.el);
+    });
+
+    // Safety net: never leave content hidden if an observer misses.
+    window.setTimeout(() => {
+      document.querySelectorAll("[data-seta-reveal]:not(.seta-in)").forEach((el) => el.classList.add("seta-in"));
+      playBarsIn(document);
+      playCountsIn(document);
+    }, 1600);
+  }
+
   function init() {
     injectBaseStyles();
 
@@ -389,7 +607,11 @@
     wireStates();
     wireForms();
     wireConversation();
+    wireMotion();
   }
+
+  // Inject styles as early as possible so reveal hidden-state is set before paint.
+  try { injectBaseStyles(); } catch (e) {}
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
