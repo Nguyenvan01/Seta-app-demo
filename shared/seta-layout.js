@@ -447,13 +447,18 @@
       return null;
     }
     if (!isFinite(value)) return null;
-    return { prefix, suffix, value, decimals, groupSep, decimalSep };
+    // Preserve zero-padded integers like "05" -> keep width 2.
+    let pad = 0;
+    const lead = core.match(/^-?(\d+)/);
+    if (lead && lead[1].length > 1 && lead[1][0] === "0") pad = lead[1].length;
+    return { prefix, suffix, value, decimals, groupSep, decimalSep, pad };
   }
 
   function formatLike(n, fmt) {
     let s = Math.abs(n).toFixed(fmt.decimals);
     let intPart = s, frac = "";
     if (fmt.decimals) { const p = s.split("."); intPart = p[0]; frac = p[1]; }
+    if (fmt.pad) intPart = intPart.padStart(fmt.pad, "0");
     if (fmt.groupSep) intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, fmt.groupSep);
     let out = intPart + (fmt.decimals ? (fmt.decimalSep || ".") + frac : "");
     if (n < 0) out = "-" + out;
@@ -520,10 +525,15 @@
     // 3) Count-up: numeric stat text in prominent typography
     const counters = [];
     document
-      .querySelectorAll('[class*="text-2xl"],[class*="text-3xl"],[class*="text-4xl"],[class*="text-5xl"],[class*="display-"],[class*="headline-"]')
+      .querySelectorAll('[class*="text-2xl"],[class*="text-3xl"],[class*="text-4xl"],[class*="text-5xl"],[class*="display-"],[class*="headline-"],[class*="text-["]')
       .forEach((el) => {
         if (el.children.length) return; // leaf text only
         if (el.closest("[data-seta-sidebar]")) return;
+        // Only prominent numbers: named large sizes, or arbitrary text-[Npx] >= 22px.
+        const cls = el.getAttribute("class") || "";
+        const named = /text-(2xl|3xl|4xl|5xl)|display-|headline-/.test(cls);
+        const arb = cls.match(/text-\[(\d+(?:\.\d+)?)px\]/);
+        if (!named && !(arb && parseFloat(arb[1]) >= 22)) return;
         const fmt = parseNumberFormat(el.textContent.trim());
         if (!fmt || fmt.value === 0) return;
         el.textContent = formatLike(0, fmt);
